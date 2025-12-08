@@ -6,13 +6,13 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 11:57:06 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/08 17:53:52 by nsaillez         ###   ########.fr       */
+/*   Updated: 2025/12/08 18:14:02 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(void) : name("~Undefined"), grade(150)
+Bureaucrat::Bureaucrat(void) : name(""), grade(150)
 {
 	// std::cout << "Bureaucrat default constructor called!" << std::endl;
 }
@@ -46,6 +46,20 @@ int Bureaucrat::getGrade() const
 	return (this->grade);
 }
 
+void Bureaucrat::incrementGrade()
+{
+	this->grade -= 1;
+	if (this->getGrade() < 1)
+		throw GradeTooHighException();
+}
+
+void Bureaucrat::decrementGrade()
+{
+	this->grade += 1;
+	if (this->getGrade() > 150)
+		throw GradeTooLowException();
+}
+
 std::ostream& operator<<(std::ostream& stream, Bureaucrat& obj)
 {
 	stream << obj.getName() << ", bureaucrat grade " << obj.getGrade();
@@ -54,6 +68,7 @@ std::ostream& operator<<(std::ostream& stream, Bureaucrat& obj)
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
+	
 	return ("The current grade is too high\n");
 }
 

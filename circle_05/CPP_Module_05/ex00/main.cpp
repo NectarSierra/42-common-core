@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 11:57:11 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/08 17:50:58 by nsaillez         ###   ########.fr       */
+/*   Updated: 2025/12/08 18:11:53 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,26 @@ int main( void )
 	{
 		Bureaucrat e("Frederic", 151);
 		std::cout << e << std::endl;
+	}
+	catch (std::exception& exc)
+	{
+		std::cout << "Caught: " << exc.what();
+	}
+
+	try
+	{
+		d.incrementGrade();
+		std::cout << d << std::endl;
+	}
+	catch (std::exception& exc)
+	{
+		std::cout << "Caught: " << exc.what();
+	}
+
+	try
+	{
+		c.decrementGrade();
+		std::cout << c << std::endl;
 	}
 	catch (std::exception& exc)
 	{

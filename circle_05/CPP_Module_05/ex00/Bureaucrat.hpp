@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 11:57:16 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/09 07:39:16 by nsaillez         ###   ########.fr       */
+/*   Updated: 2025/12/09 08:26:02 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define BUREAU_CRAT_HPP
 
 #include <iostream>
-#include <exception>
 
 class Bureaucrat 
 {

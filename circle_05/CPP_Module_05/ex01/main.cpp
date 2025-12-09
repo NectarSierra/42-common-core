@@ -6,54 +6,40 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 11:57:11 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/08 18:11:53 by nsaillez         ###   ########.fr       */
+/*   Updated: 2025/12/09 09:25:54 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main( void )
 {
-	Bureaucrat a;
-	std::cout << a << std::endl;
+	Bureaucrat user_lambda("Lambda", 150);
+	Bureaucrat user_root("Root", 1);
+
+	Form form_secret("Secret form", 1, 1);
+	Form form_public("Public form", 150, 150);
 	
-	Bureaucrat b("Julien", 54);
-	std::cout << b << std::endl;
+	std::cout << user_lambda << std::endl;
+	std::cout << user_root << std::endl;
 	
-	Bureaucrat c("Noah", 150);
-	std::cout << c << std::endl;
+	std::cout << std::endl;
+	
+	std::cout << form_secret << std::endl;
+	std::cout << form_public << std::endl;
 
-	Bureaucrat d("Lola", 1);
-	std::cout << d << std::endl;
+	std::cout << std::endl;
+	
+	user_lambda.signForm(form_secret);
 
+	// form_secret.beSigned(user_lambda);
 	try
 	{
-		Bureaucrat e("Frederic", 151);
-		std::cout << e << std::endl;
+		form_secret.beSigned(user_lambda);
 	}
-	catch (std::exception& exc)
+	catch(const std::exception& exc)
 	{
-		std::cout << "Caught: " << exc.what();
-	}
-
-	try
-	{
-		d.incrementGrade();
-		std::cout << d << std::endl;
-	}
-	catch (std::exception& exc)
-	{
-		std::cout << "Caught: " << exc.what();
-	}
-
-	try
-	{
-		c.decrementGrade();
-		std::cout << c << std::endl;
-	}
-	catch (std::exception& exc)
-	{
-		std::cout << "Caught: " << exc.what();
+		std::cerr << exc.what() << '\n';
 	}
 	
 	return (0);

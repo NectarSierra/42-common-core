@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 06:41:41 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/09 07:44:09 by nsaillez         ###   ########.fr       */
+/*   Updated: 2025/12/09 09:25:36 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #define FORM_HPP
 
 #include <iostream>
+#include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form
 {
@@ -30,10 +33,11 @@ class Form
 	private:
 		Form& operator=(Form& obj);
 	public:
-		std::string getName(void);
-		bool getSignature(void);
-		int getGradRequiredToSign(void);
-		int getGradeRequiredToExecute(void);
+		std::string getName(void) const;
+		bool getSignature(void) const;
+		int getGradeRequiredToSign(void) const;
+		int getGradeRequiredToExecute(void) const;
+		void beSigned(Bureaucrat& obj);
 
 	class GradeTooHighException : public std::exception
 	{
@@ -48,6 +52,6 @@ class Form
 	};
 };
 
-std::iostream& operator<<(std::iostream& stream, Form& obj);
+std::ostream& operator<<(std::ostream& stream, Form& obj);
 
 #endif

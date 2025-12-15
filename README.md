@@ -12,7 +12,7 @@ and collaboration without traditional teachers or lectures.
 All C projects at 42 must adhere to the Norminette, the school’s official coding standard.  
 This set of rules ensures consistent formatting, clarity, and maintainable code across all student work.
 
-Key constraints include:
+Key constraints include (only for C):
 
 - No `for` loops (only `while` loops are permitted)  
 - No `switch` statements (control flow must rely on `if`/`else`)  

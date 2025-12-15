@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Intern.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/08 11:57:11 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/15 14:41:17 by nsaillez         ###   ########.fr       */
+/*   Created: 2025/12/15 12:46:41 by nsaillez          #+#    #+#             */
+/*   Updated: 2025/12/15 12:57:27 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef INTERN_HPP
+#define INTERN_HPP
+
+#include <iostream>
 #include "AForm.hpp"
-#include "Intern.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
-int main( void )
+class Intern
 {
-	Intern ok;
+	public:
+		Intern();
+		Intern(const Intern& obj);
+		~Intern();
+	private:
+		Intern& operator=(const Intern& obj);
+	public:
+		AForm* makeForm(std::string form, std::string target);
 
-	AForm* rrf;
+	class NotFound : public std::exception
+	{
+		private:
+			const char* what() const throw();
+	};
+};
 
-	rrf = ok.makeForm("shrubbery creatio", "Target");
-
-	if (rrf != NULL)
-		std::cout << *rrf;
-	return (0);
-}
+#endif

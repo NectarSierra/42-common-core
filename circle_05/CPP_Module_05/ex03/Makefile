@@ -6,7 +6,7 @@
 #    By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/08 10:58:15 by nsaillez          #+#    #+#              #
-#    Updated: 2025/12/09 10:39:01 by nsaillez         ###   ########.fr        #
+#    Updated: 2025/12/15 12:47:27 by nsaillez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS     = main.cpp \
 		   AForm.cpp \
 		   PresidentialPardonForm.cpp \
 		   RobotomyRequestForm.cpp \
-		   ShrubberyCreationForm.cpp
+		   ShrubberyCreationForm.cpp \
+		   Intern.cpp
 
 OBJ_DIR  = objs
 OBJS     = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)

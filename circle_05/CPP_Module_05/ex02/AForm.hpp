@@ -41,6 +41,12 @@ class AForm
 
 		void execute(Bureaucrat const &executor) const;
 		virtual void executer() const = 0;
+		
+	class AlreadySigned : public std::exception
+	{
+		private:
+			const char* what() const throw();
+	};
 
 	class GradeTooHighException : public std::exception
 	{
@@ -58,7 +64,7 @@ class AForm
 	{
 		private:
 			const char* what() const throw();
-	};
+	};	
 };
 
 std::ostream& operator<<(std::ostream& stream, AForm& obj);

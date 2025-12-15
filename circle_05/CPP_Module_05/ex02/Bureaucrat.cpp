@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 11:57:06 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/09 10:26:18 by nsaillez         ###   ########.fr       */
+/*   Updated: 2025/12/15 11:49:47 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,19 @@ void Bureaucrat::signForm(AForm& obj)
 	}
 }
 
+void Bureaucrat::executeForm(AForm const& obj) const
+{
+	try
+	{
+		obj.execute(*this);
+		std::cout << this->getName() << " executed " << obj.getName() << std::endl;
+	}
+	catch(const std::exception& exc)
+	{
+		std::cerr << exc.what() << '\n';
+	}
+}
+
 std::ostream& operator<<(std::ostream& stream, Bureaucrat& obj)
 {
 	stream << obj.getName() << ", bureaucrat grade " << obj.getGrade();
@@ -87,10 +100,10 @@ std::ostream& operator<<(std::ostream& stream, Bureaucrat& obj)
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return ("The current grade is too high\n");
+	return ("Exception: The current grade is too high\n");
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return ("The current grade is too low\n");
+	return ("Exception: The current grade is too low\n");
 }

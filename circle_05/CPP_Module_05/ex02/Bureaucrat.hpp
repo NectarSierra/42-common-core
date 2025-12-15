@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 11:57:16 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/09 10:31:55 by nsaillez         ###   ########.fr       */
+/*   Updated: 2025/12/15 10:53:23 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ class Bureaucrat
 		void incrementGrade();
 		void decrementGrade();
 		void signForm(AForm& obj);
+		void executeForm(AForm const& obj) const;
 
 	class GradeTooHighException : public std::exception
 	{

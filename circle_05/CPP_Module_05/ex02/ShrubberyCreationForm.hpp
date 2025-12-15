@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 10:33:02 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/15 09:49:53 by nsaillez         ###   ########.fr       */
+/*   Updated: 2025/12/15 11:27:07 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class ShrubberyCreationForm : public AForm
 	private:
 		ShrubberyCreationForm& operator=(ShrubberyCreationForm& obj);
 	public:
-		void shrubberycreation();
+		virtual void executer() const;
 };
 
 #endif

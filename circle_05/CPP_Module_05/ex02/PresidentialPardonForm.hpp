@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 10:35:04 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/15 09:40:45 by nsaillez         ###   ########.fr       */
+/*   Updated: 2025/12/15 11:27:21 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class PresidentialPardonForm : public AForm
 	private:
 		PresidentialPardonForm& operator=(const PresidentialPardonForm& obj);
 	public:
-		void presidentialpardon();
+		virtual void executer() const;
 };
 
 #endif

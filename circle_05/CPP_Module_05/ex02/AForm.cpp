@@ -76,6 +76,16 @@ void AForm::beSigned(Bureaucrat& obj)
 		throw GradeTooLowException();
 }
 
+void AForm::execute(Bureaucrat const &executor) const
+{
+	if (executor.getGrade() > this->getGradeRequiredToExecute())
+		throw GradeTooLowException();
+	else if (this->getSignature() != true)
+		throw NotSignedException();
+	else
+		this->executer();
+}
+
 std::ostream& operator<<(std::ostream& stream, AForm& obj)
 {
 	stream << obj.getName() << ", Form require grade of "
@@ -86,10 +96,15 @@ std::ostream& operator<<(std::ostream& stream, AForm& obj)
 
 const char* AForm::GradeTooHighException::what() const throw()
 {
-	return ("The current grade is too high\n");
+	return ("Exception: The current grade is too high");
 }
 
 const char* AForm::GradeTooLowException::what() const throw()
 {
-	return ("The current grade is too low\n");
+	return ("Exception: The current grade is too low");
+}
+
+const char* AForm::NotSignedException::what() const throw()
+{
+	return ("Exception:The current form is not signed");
 }

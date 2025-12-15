@@ -6,11 +6,17 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:46:52 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/15 14:41:31 by nsaillez         ###   ########.fr       */
+/*   Updated: 2025/12/15 15:17:13 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Intern.hpp"
+
+enum Forms{
+	SHRUBERRY,
+	ROBOTOMY,
+	PRESIDENTIAL
+};
 
 Intern::Intern()
 {
@@ -32,11 +38,11 @@ AForm* Intern::makeForm(std::string form, std::string target)
 		i++;
 	switch (i)
 	{
-		case 0:
+		case SHRUBERRY:
 			return (new ShrubberyCreationForm(target));
-		case 1:
+		case ROBOTOMY:
 			return (new RobotomyRequestForm(target));
-		case 2:
+		case PRESIDENTIAL:
 			return (new PresidentialPardonForm(target));
 	}
 	throw NotFound();

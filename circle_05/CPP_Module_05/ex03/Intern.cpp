@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 12:46:52 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/15 15:17:13 by nsaillez         ###   ########.fr       */
+/*   Updated: 2025/12/15 15:26:15 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ enum Forms{
 Intern::Intern()
 {
 	
+}
+
+Intern::Intern(const Intern& obj)
+{
+	(void)obj;
+	// nothing to copy
 }
 
 AForm* Intern::makeForm(std::string form, std::string target)

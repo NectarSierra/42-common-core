@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 11:57:11 by nsaillez          #+#    #+#             */
-/*   Updated: 2025/12/15 14:41:17 by nsaillez         ###   ########.fr       */
+/*   Updated: 2025/12/15 15:37:48 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,17 @@
 
 int main( void )
 {
-	Intern ok;
-
+	Intern someRandomIntern;
 	AForm* rrf;
+	
+	rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+	std::cout << *rrf << "\n";
+	
+	rrf = someRandomIntern.makeForm("presidential pardon", "Spoonkid");
+	std::cout << *rrf << "\n";
 
-	rrf = ok.makeForm("shrubbery creatio", "Target");
-
-	if (rrf != NULL)
-		std::cout << *rrf;
+	// rrf = someRandomIntern.makeForm("ej1rgi5ut324r4re", "67");
+	// std::cout << *rrf << "\n";
+	
 	return (0);
 }

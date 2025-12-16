@@ -42,3 +42,10 @@ To compile the mandatory version:
 
 ```bash
 make
+```
+
+To compile the bonus version:
+
+```bash
+make bonus
+```

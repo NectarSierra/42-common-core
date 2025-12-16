@@ -1,7 +1,5 @@
 # SO_LONG
 
-![Grade](/circle_02/so_long/readme_srcs/grade.png?raw=true)
-
 This project is a maze game in 2D
 ![Gameplay](/circle_02/so_long/readme_srcs/gameplay.png?raw=true)
 

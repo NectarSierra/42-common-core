@@ -1,17 +1,44 @@
 # SO_LONG
 
-This project is a maze game in 2D
+**so_long** is a 2D maze-based game developed as part of the 42 curriculum.  
+The project is built using **MiniLibX**, a lightweight graphical library provided by 42, and focuses on fundamental concepts such as window management, event handling, textures, and basic game logic.
+
+---
+
+## Overview
+
+The goal of the game is to navigate through a maze, collect all collectibles, and reach the exit while avoiding obstacles.  
+The player must carefully plan their movement to complete the map successfully.
+
 ![Gameplay](/circle_02/so_long/readme_srcs/gameplay.png?raw=true)
 
-we had to use a 42 library called the minilibx to make this game
+---
 
-to execute the game you will have to make, then execute the ./so_long "insert_maps"
-since I've already made some maps you can pick one in srcs/maps.
+## Features
 
-I'm quite happy with that project I Did it with a lot of fun and even pushed the project a step ahead
-by adding a way to show the pathfinding
-![pathfinding](/circle_02/so_long/readme_srcs/pathfinding.png?raw=true)
+- 2D top-down maze gameplay
+- Keyboard-based player movement
+- Collectibles and exit system
+- Map validation and error handling
+- Custom-made graphical assets
+- Smooth rendering using MiniLibX
 
-Since pathfinding is a bonus if you want to actually see it you will have to make with the rule bonus (make bonus)
+---
 
-all assets are drawn by me and I think they look sick!
+## Bonus Features
+
+In addition to the mandatory requirements, the project includes a **pathfinding visualization system**.  
+This feature displays the path used to validate map solvability and helps visualize how the player can reach all collectibles and the exit.
+
+![Pathfinding](/circle_02/so_long/readme_srcs/pathfinding.png?raw=true)
+
+The pathfinding system is compiled and available **only in the bonus version**.
+
+---
+
+## Compilation
+
+To compile the mandatory version:
+
+```bash
+make

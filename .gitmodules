@@ -5,3 +5,4 @@
 [submodule "circle_04/cub3d"]
 	path = circle_04/cub3d
 	url = https://github.com/RomainBoland/cub3d.git
+	branch = main

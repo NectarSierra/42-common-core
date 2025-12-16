@@ -25,3 +25,10 @@ These requirements promote strong programming discipline and a solid foundation 
 
 **Note:** Due to copyright restrictions, original project subjects cannot be shared.  
 For assignments requiring additional context, a README is provided summarizing the main objectives and key concepts.
+
+## Important!
+
+Due to the use of submodules, you need to clone the repository using the following command:
+```bash
+git clone --recurse-submodules https://github.com/NectarSierra/42-common-core.git
+```

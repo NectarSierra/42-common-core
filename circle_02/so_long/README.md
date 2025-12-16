@@ -8,7 +8,7 @@ The project is built using **MiniLibX**, a lightweight graphical library provide
 The goal of the game is to navigate through a maze, collect all collectibles, and reach the exit while avoiding obstacles.  
 The player must carefully plan their movement to complete the map successfully.
 
-![Gameplay](/circle_02/so_long/readme_srcs/gameplay.png?raw=true)
+![Gameplay](readme_srcs/gameplay.png?raw=true)
 
 ## Features
 
@@ -24,7 +24,7 @@ The player must carefully plan their movement to complete the map successfully.
 In addition to the mandatory requirements, the project includes a **pathfinding visualization system**.  
 This feature displays the path used to validate map solvability and helps visualize how the player can reach all collectibles and the exit.
 
-![Pathfinding](/circle_02/so_long/readme_srcs/pathfinding.png?raw=true)
+![Pathfinding](readme_srcs/pathfinding.png?raw=true)
 
 The pathfinding system is compiled and available **only in the bonus version**.
 

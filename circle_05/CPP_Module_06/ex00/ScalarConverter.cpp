@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 08:49:20 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/01/06 16:30:35 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/01/06 16:33:54 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ void print_char_type(char data)
 	if (data < 32 || data > 126)
 		std::cout << "char: " << "Non displayable." << "\n";
 	else
-		std::cout << "char: " << data << "\n";
+		std::cout << "char: " << "'" << data << "'"<< "\n";
 	std::cout << "int: " << static_cast<int>(data) << "\n";
-	std::cout << "float: " << static_cast<float>(data) << ".0f\n";
-	std::cout << "double: " << static_cast<double>(data) << ".0\n";
+	std::cout << "float: " << static_cast<float>(data) << "f\n";
+	std::cout << "double: " << static_cast<double>(data) << "\n";
 }
 
 void print_int_type(int data)
@@ -114,7 +114,7 @@ void print_int_type(int data)
 	if (data < 32 || data > 126)
 		std::cout << "char: " << "Non displayable." << "\n";
 	else
-		std::cout << "char: " << static_cast<char>(data) << "\n";
+		std::cout << "char: " << "'" << static_cast<char>(data) << "'"<< "\n";
 	std::cout << "int: " << data << "\n";
 	std::cout << "float: " << static_cast<float>(data) << "f\n";
 	std::cout << "double: " << static_cast<double>(data) << "\n";

@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 08:49:20 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/01/05 14:38:39 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/01/06 16:25:57 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,36 @@
 #include <iomanip>
 #include <cstdlib>
 
-void nanf(std::string type)
+void nanf(float data)
 {
-	float a = atof(type.c_str());
-	std::cout << "char: " << "Impossible" << "\n";
-	std::cout << "int: " << "Impossible" << "\n";
-	std::cout << "float: " << static_cast<float>(a) << "f\n";
-	std::cout << "double: " << static_cast<double>(a) << "\n";
+	std::cout << "char: " << "impossible" << "\n";
+	std::cout << "int: " << "impossible" << "\n";
+	std::cout << "float: " << data << "f\n";
+	std::cout << "double: " << static_cast<double>(data) << "\n";
 }
 
-void inff(std::string type)
+void inff(double data)
 {
-	float a = atof(type.c_str());
-	std::cout << "char: " << "Impossible" << "\n";
-	std::cout << "int: " << "Impossible" << "\n";
-	std::cout << "float: " << static_cast<float>(a) << "f\n";
-	std::cout << "double: " << static_cast<double>(a) << "\n";
+	std::cout << "char: " << "impossible" << "\n";
+	std::cout << "int: " << "impossible" << "\n";
+	std::cout << "float: " << data << "f\n";
+	std::cout << "double: " << static_cast<double>(data) << "\n";
 }
 
-void nan(std::string type)
+void nan(float data)
 {
-	double a = atof(type.c_str());
-	std::cout << "char: " << "Impossible" << "\n";
-	std::cout << "int: " << "Impossible" << "\n";
-	std::cout << "float: " << static_cast<float>(a) << "f\n";
-	std::cout << "double: " << static_cast<double>(a) << "\n";
+	std::cout << "char: " << "impossible" << "\n";
+	std::cout << "int: " << "impossible" << "\n";
+	std::cout << "float: " << static_cast<float>(data) << "f\n";
+	std::cout << "double: " << data << "\n";
 }
 
-void inf(std::string type)
+void inf(double data)
 {
-	double a = atof(type.c_str());
-	std::cout << "char: " << "Impossible" << "\n";
-	std::cout << "int: " << "Impossible" << "\n";
-	std::cout << "float: " << static_cast<float>(a) << "f\n";
-	std::cout << "double: " << static_cast<double>(a) << "\n";
+	std::cout << "char: " << "impossible" << "\n";
+	std::cout << "int: " << "impossible" << "\n";
+	std::cout << "float: " << static_cast<float>(data) << "f\n";
+	std::cout << "double: " << data << "\n";
 }
 
 int	overflow_check(int res, int digit, int isneg)
@@ -91,149 +87,121 @@ int	char_to_int_overflow(const char *str)
 		res = (res * 10) + (str[i] - '0');
 		i++;
 	}
-	if (str[i] == '.' || (str[i] == 'f' && !str[i + 1]))
-			return (0);
+	if (str[i] == '.' || !(str[i] >= 48 && str[i] <= 57))
+		return (0);
 	if (str[i] || str[i - 1] == '-' || str[i - 1] == '+')
 		return (-1);
 	return (0);
 }
 
-void is_int(std::string type)
+void print_char_type(char data)
 {
-	int v = std::atoi(type.c_str());
-
-	if (v < 32 || v > 126)
-		std::cout << "char: " << "Impossible." << "\n";
+	std::cout << "CHAR" << std::endl;
+	
+	if (data < 32 || data > 126)
+		std::cout << "char: " << "Non displayable." << "\n";
 	else
-		std::cout << "char: " << static_cast<char>(v) << "\n";
-	std::cout << "int: " << static_cast<int>(v) << "\n";
-	std::cout << "float: " << static_cast<float>(v) << "f\n";
-	std::cout << "double: " << static_cast<double>(v) << "\n";
+		std::cout << "char: " << data << "\n";
+	std::cout << "int: " << static_cast<int>(data) << "\n";
+	std::cout << "float: " << static_cast<float>(data) << ".0f\n";
+	std::cout << "double: " << static_cast<double>(data) << ".0\n";
 }
 
-void is_float(std::string type)
+void print_int_type(int data)
 {
-	float v = std::atof(type.c_str());
-	std::cout << std::setprecision(1) << std::fixed;
+	std::cout << "INT" << std::endl;
 
-	if (v < 32 || v > 126)
-	{
+	if (data < 32 || data > 126)
 		std::cout << "char: " << "Non displayable." << "\n";
-		std::cout << "int: " << static_cast<int>(v) << "\n";
-	}
 	else
-	{
-		std::cout << "char: " << "'" << static_cast<char>(v) << "'"<< "\n";
-		std::cout << "int: " << static_cast<int>(v) << "\n";
-	}
-	std::cout << "float: " << v << "f\n";
-	std::cout << "double: " << static_cast<double>(v) << "\n";
+		std::cout << "char: " << static_cast<char>(data) << "\n";
+	std::cout << "int: " << data << "\n";
+	std::cout << "float: " << static_cast<float>(data) << "f\n";
+	std::cout << "double: " << static_cast<double>(data) << "\n";
 }
 
-void is_double(std::string type)
+void print_float_type(double data)
 {
-	double v = std::atof(type.c_str());
-	std::cout << std::setprecision(1) << std::fixed;
-	if (v < 32 || v > 126)
-	{
+	std::cout << "FLOAT" << std::endl;
+	
+	if (data < 32 || data > 126)
 		std::cout << "char: " << "Non displayable." << "\n";
-		std::cout << "int: " << static_cast<int>(v) << "\n";
-	}
 	else
-	{
-		std::cout << "char: " << "'" << static_cast<char>(v) << "'"<< "\n";
-		std::cout << "int: " << static_cast<int>(v) << "\n";
-	}
-	std::cout << "float: " << static_cast<float>(v) << "f\n";
-	std::cout << "double: " << v << "\n";
+		std::cout << "char: " << "'" << static_cast<char>(data) << "'"<< "\n";
+	std::cout << "int: " << static_cast<int>(data) << "\n";
+	std::cout << "float: " << data << "f\n";
+	std::cout << "double: " << static_cast<double>(data) << "\n";
+}
+
+void print_double_type(double data)
+{
+	std::cout << "DOUBLE" << std::endl;
+	
+	if (data < 32 || data > 126)
+		std::cout << "char: " << "Non displayable." << "\n";
+	else
+		std::cout << "char: " << "'" << static_cast<char>(data) << "'"<< "\n";
+	std::cout << "int: " << static_cast<int>(data) << "\n";
+	std::cout << "float: " << static_cast<float>(data) << "f\n";
+	std::cout << "double: " << data << "\n";
 }
 
 void find_type(std::string type)
 {
-	bool dot = false;
-	bool f = false;
-	
+	bool has_dot;
 
-	for(int i = 0; i < static_cast<int>(type.length()); i++)
+	if (type.length() == 1 && (type[0] < '0' || type[0] > '9'))
 	{
-		if (type[i] == '-' && i == 0)
-			continue;
-		
-		if (type[i] < '0' || type[i] > '9')
-		{
-			if (type[i] == '.')
-			{
-				if (dot == true)
-				{
-					std::cout << "char: " << "Impossible" << "\n";
-					std::cout << "int: " << "Nan" << "\n";
-					std::cout << "float: " << "Nan" << "f\n";
-					std::cout << "double: " << "Nan" << "\n";
-					return;
-				}
-				dot = true;
-				continue;
-			}
-			if (static_cast<int>(type.length()) == i + 1)
-			{
-				f = true;
-				break;
-			}
-			std::cout << "char: " << "Impossible" << "\n";
-			std::cout << "int: " << "Nan" << "\n";
-			std::cout << "float: " << "Nan" << "f\n";
-			std::cout << "double: " << "Nan" << "\n";
-			return;
-		}
+		print_char_type(static_cast<char>(type[0]));
+		return;
 	}
 
-	if (dot == false)
-		is_int(type);
-	else if (f == false)
-		is_double(type);
+	if (char_to_int_overflow(type.c_str()))
+	{
+		std::cout << "ERROR - Overflow detected type conversion impossible.\n";
+		return;
+	}	
+
+	for(unsigned long i = 0; i < type.length(); i++)
+	{
+		if (type[i] >= '0' && type[i] <= '9')
+			continue;
+		
+		if (type[i] == '-' && i == 0)
+			continue;
+			
+		if (type[i] == '.' && has_dot == false)
+		{
+			has_dot = true;
+			continue;
+		}
+		
+		if (type[i] == 'f' && type.length() == i + 1)
+		{
+			print_float_type(atof(type.c_str()));
+			return;
+		}
+		std::cout << "ERROR - Type conversion impossible: " << type[i] << "\n"; 
+		return;
+	}
+	if (has_dot == false)
+		print_int_type(atoi(type.c_str()));
 	else
-		is_float(type);
+		print_double_type(atof(type.c_str()));
 }
 
 void ScalarConverter::convert(std::string type)
 {
-	if (type.length() == 1)
-	{
-		char a = static_cast<char>(type[0]);
-		if (a >= '0' && a <= '9')
-		{
-			std::cout << "char: " << "Not displayable" << "\n";
-			std::cout << "int: " << static_cast<int>(a)-'0' << "\n";
-			std::cout << "float: " << static_cast<float>(a)-'0' << ".0f\n";
-			std::cout << "double: " << static_cast<double>(a)-'0' << ".0\n";
-			return ;
-		}
-			
-		if (a < 32 || a > 126)
-			std::cout << "char: " << "Not displayable" << "\n";
-		else
-			std::cout << "char: " << a << "\n";
-		std::cout << "int: " << static_cast<int>(a) << "\n";
-		std::cout << "float: " << static_cast<float>(a) << ".0f\n";
-		std::cout << "double: " << static_cast<double>(a) << ".0\n";
-	}
-	else
-	{
-		if (type == "nan")
-			return nan(type);
-		if (type == "nanf")
-			return nanf(type);
-		if (!type.compare("inff") || !type.compare("+inff") || !type.compare("-inff"))
-			return inf(type);
-		if (!type.compare("inf") || !type.compare("+inf") || !type.compare("-inf"))
-			return inff(type);
-		if (char_to_int_overflow(type.c_str()))
-		{
-			std::cout << "Type conversion impossible.\n";
-			return;
-		}
-		find_type(type);
-	}
+	if (type == "nan")
+		return nan(atof(type.c_str()));
+	if (type == "nanf")
+		return nanf(atof(type.c_str()));
+	if (!type.compare("inff") || !type.compare("+inff") || !type.compare("-inff"))
+		return inf(atof(type.c_str()));
+	if (!type.compare("inf") || !type.compare("+inf") || !type.compare("-inf"))
+		return inff(atof(type.c_str()));
+	std::cout << std::setprecision(1) << std::fixed;
+	find_type(type);
 }
 
 

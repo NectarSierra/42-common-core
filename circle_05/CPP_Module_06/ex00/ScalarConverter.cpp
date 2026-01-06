@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 08:49:20 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/01/06 16:25:57 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/01/06 16:30:35 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	char_to_int_overflow(const char *str)
 
 void print_char_type(char data)
 {
-	std::cout << "CHAR" << std::endl;
+	// std::cout << "CHAR" << std::endl;
 	
 	if (data < 32 || data > 126)
 		std::cout << "char: " << "Non displayable." << "\n";
@@ -109,7 +109,7 @@ void print_char_type(char data)
 
 void print_int_type(int data)
 {
-	std::cout << "INT" << std::endl;
+	// std::cout << "INT" << std::endl;
 
 	if (data < 32 || data > 126)
 		std::cout << "char: " << "Non displayable." << "\n";
@@ -122,7 +122,7 @@ void print_int_type(int data)
 
 void print_float_type(double data)
 {
-	std::cout << "FLOAT" << std::endl;
+	// std::cout << "FLOAT" << std::endl;
 	
 	if (data < 32 || data > 126)
 		std::cout << "char: " << "Non displayable." << "\n";
@@ -135,7 +135,7 @@ void print_float_type(double data)
 
 void print_double_type(double data)
 {
-	std::cout << "DOUBLE" << std::endl;
+	// std::cout << "DOUBLE" << std::endl;
 	
 	if (data < 32 || data > 126)
 		std::cout << "char: " << "Non displayable." << "\n";

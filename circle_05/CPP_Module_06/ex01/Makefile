@@ -6,7 +6,7 @@
 #    By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/08 10:58:15 by nsaillez          #+#    #+#              #
-#    Updated: 2026/01/12 08:59:41 by nsaillez         ###   ########.fr        #
+#    Updated: 2026/01/12 10:30:50 by nsaillez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ FLAGS    = -Wall -Wextra -Werror
 STD_FLAG = -std=c++98
 OUT_NAME = output
 
-SRCS     = main.cpp
+SRCS     = main.cpp \
+		   Serializer.cpp
 
 OBJ_DIR  = objs
 OBJS     = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)

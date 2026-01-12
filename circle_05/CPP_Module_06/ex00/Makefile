@@ -6,7 +6,7 @@
 #    By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/08 10:58:15 by nsaillez          #+#    #+#              #
-#    Updated: 2026/01/12 09:51:23 by nsaillez         ###   ########.fr        #
+#    Updated: 2026/01/12 10:13:43 by nsaillez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,7 @@ STD_FLAG = -std=c++98
 OUT_NAME = convert
 
 SRCS     = main.cpp \
-		   ScalarConverter.cpp \
-		   utils.cpp
+		   ScalarConverter.cpp
 
 OBJ_DIR  = objs
 OBJS     = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)

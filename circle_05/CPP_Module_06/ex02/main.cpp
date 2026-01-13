@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:13:18 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/01/12 16:35:53 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/01/13 09:06:09 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int main()
 	Base::identify(a_ref);
 	
 	Base* generated = Base::generate();
+	Base& generated_ref = *generated;
 	Base::identify(generated);
+	Base::identify(generated_ref);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:10:28 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/01/13 08:50:09 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/01/13 13:30:04 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,45 @@ Base* Base::generate(void)
 
 void Base::identify(Base* p)
 {
-	if (dynamic_cast<A*>(p))
+	if (dynamic_cast<A*>(p) != NULL)
 		std::cout << "object_type: A" << std::endl;
-	if (dynamic_cast<B*>(p))
+	if (dynamic_cast<B*>(p) != NULL)
 		std::cout << "object_type: B" << std::endl;
-	if (dynamic_cast<C*>(p))
+	if (dynamic_cast<C*>(p) != NULL)
 		std::cout << "object_type: C" << std::endl;
 }
 
 void Base::identify(Base& p)
 {
-	if (dynamic_cast<A*>(&p))
+	try
+	{
+		A& a = dynamic_cast<A&>(p);
+		(void)a;
 		std::cout << "object_type: A" << std::endl;
-	if (dynamic_cast<B*>(&p))
+	}
+	catch(const std::exception& e)
+	{
+		// std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		B& b = dynamic_cast<B&>(p);
+		(void)b;
 		std::cout << "object_type: B" << std::endl;
-	if (dynamic_cast<C*>(&p))
+	}
+	catch(const std::exception& e)
+	{
+		// std::cerr << e.what() << '\n';
+	}
+	try
+	{
+		C& c = dynamic_cast<C&>(p);
+		(void)c;
 		std::cout << "object_type: C" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		// std::cerr << e.what() << '\n';
+	}
+	
 }

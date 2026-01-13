@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 08:49:20 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/01/12 10:14:22 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/01/13 10:16:34 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void ScalarConverter::print_double_type(double data)
 
 void ScalarConverter::find_type(std::string type)
 {
-	bool has_dot;
+	bool has_dot = false;
 
 	if (type.length() == 1 && (type[0] < '0' || type[0] > '9'))
 	{

@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 12:10:28 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/01/13 13:30:04 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/01/15 09:08:51 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void Base::identify(Base& p)
 {
 	try
 	{
-		A& a = dynamic_cast<A&>(p);
-		(void)a;
+		A& res = dynamic_cast<A&>(p);
+		(void)res;
 		std::cout << "object_type: A" << std::endl;
 	}
 	catch(const std::exception& e)
@@ -58,8 +58,8 @@ void Base::identify(Base& p)
 	}
 	try
 	{
-		B& b = dynamic_cast<B&>(p);
-		(void)b;
+		B& res = dynamic_cast<B&>(p);
+		(void)res;
 		std::cout << "object_type: B" << std::endl;
 	}
 	catch(const std::exception& e)
@@ -68,8 +68,8 @@ void Base::identify(Base& p)
 	}
 	try
 	{
-		C& c = dynamic_cast<C&>(p);
-		(void)c;
+		C& res = dynamic_cast<C&>(p);
+		(void)res;
 		std::cout << "object_type: C" << std::endl;
 	}
 	catch(const std::exception& e)

@@ -6,7 +6,14 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 08:48:00 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/01/20 08:48:01 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/01/20 09:44:25 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Array.hpp"
+
+int main()
+{
+	Array<int> test;
+	return (0);
+}

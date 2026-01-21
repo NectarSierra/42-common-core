@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 09:26:05 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/01/21 11:47:32 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/01/21 12:31:15 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Array<T>::Array()
 }
 
 template <class T>
-Array<T>::Array(unsigned int n)
+Array<T>::Array(const unsigned int n)
 {
 	this->array = new T[n];
 	this->array_size = n;
@@ -33,7 +33,7 @@ Array<T>::Array(unsigned int n)
 }
 
 template <class T>
-Array<T>::Array(Array<T>& other)
+Array<T>::Array(const Array<T>& other)
 {
 	this->array = new T[other.size()];
 	this->array_size = other.size();
@@ -48,7 +48,7 @@ Array<T>::~Array()
 }
 
 template <class T>
-Array<T>& Array<T>::operator=(Array<T>& other)
+Array<T>& Array<T>::operator=(Array<T>& other) const
 {
 	this->array = new T[other.size()];
 	this->array_size = other.size();
@@ -73,7 +73,7 @@ void Array<T>::add_one_to_all(void)
 }
 
 template <class T>
-void Array<T>::print_arr(void)
+void Array<T>::print_arr(void) const
 {
 	for (unsigned int i = 0; i < this->size(); i++)
 		std::cout << "[" <<this->array[i] << "]";
@@ -81,7 +81,7 @@ void Array<T>::print_arr(void)
 }
 
 template <class T>
-unsigned int Array<T>::size(void)
+unsigned int Array<T>::size(void) const
 {
 	return (this->array_size);
 }

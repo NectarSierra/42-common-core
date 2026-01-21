@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 08:47:58 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/01/21 11:38:28 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/01/21 12:31:58 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ class Array
 	public:
 		Array();
 		Array(unsigned int n);
-		Array(Array& other);
+		Array(const Array& other);
 		~Array();
 		
-		Array& operator=(Array& other);
+		Array& operator=(Array& other) const;
 		T& operator[](unsigned int index);
 
-		unsigned int size(void);
-		void print_arr(void);
+		unsigned int size(void) const;
+		void print_arr(void) const;
 		void add_one_to_all(void);
 		
 	public:

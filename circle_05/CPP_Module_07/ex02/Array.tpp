@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 09:26:05 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/01/21 11:15:45 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/01/21 11:47:32 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ Array<T>& Array<T>::operator=(Array<T>& other)
 }
 
 template <class T>
+T& Array<T>::operator[](unsigned int index)
+{
+	if (index > this->array_size - 1 || index < 0)
+		throw Out_of_bounds();
+	return (this->array[index]);
+}
+
+template <class T>
 void Array<T>::add_one_to_all(void)
 {
 	for (unsigned int i = 0; i < this->size(); i++)
@@ -68,13 +76,20 @@ template <class T>
 void Array<T>::print_arr(void)
 {
 	for (unsigned int i = 0; i < this->size(); i++)
-		std::cout << this->array[i] << std::endl;
+		std::cout << "[" <<this->array[i] << "]";
+	std::cout << std::endl;
 }
 
 template <class T>
 unsigned int Array<T>::size(void)
 {
 	return (this->array_size);
+}
+
+template <class T>
+const char* Array<T>::Out_of_bounds::what() const throw()
+{
+	return ("Element index is out of bounds.");
 }
 
 #endif

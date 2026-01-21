@@ -6,11 +6,11 @@
 #    By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/08 10:58:15 by nsaillez          #+#    #+#              #
-#    Updated: 2026/01/20 13:29:43 by nsaillez         ###   ########.fr        #
+#    Updated: 2026/01/21 10:56:33 by nsaillez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-COMP     = c++
+COMP     = c++ -g
 FLAGS    = -Wall -Wextra -Werror
 STD_FLAG = -std=c++98
 OUT_NAME = output

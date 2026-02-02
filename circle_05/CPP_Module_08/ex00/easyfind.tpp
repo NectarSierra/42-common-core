@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 09:17:11 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/02 13:41:15 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/02/02 13:59:55 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ typename T::iterator easyfind(T container, int index)
 		if (*it == index)
 			return (it);
 	}
-	return (it);
+	throw std::out_of_range("couldn't find occurence");
 }

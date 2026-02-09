@@ -9,4 +9,3 @@
 [submodule "circle_05/ft_irc"]
 	path = circle_05/ft_irc
 	url = https://github.com/Vlekzander/ft_irc.git
-	branch = main

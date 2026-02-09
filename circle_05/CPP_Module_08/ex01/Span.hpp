@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:09:34 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/09 16:58:55 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:44:07 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 #include <iostream>
 #include <exception>
 #include <vector>
+#include <algorithm>
 
 
 class Span
 {
 	private:
+		unsigned int max_index;
 		std::vector<unsigned int> elements;
-		std::vector<unsigned int>::iterator it;
 	public:
 		Span(unsigned int N);
 		Span(const Span& other);

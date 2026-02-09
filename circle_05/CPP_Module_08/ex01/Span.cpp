@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:09:45 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/09 17:15:41 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/02/09 18:14:38 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 Span::Span(unsigned int N)
 {
+	max_index = N;
 	elements.reserve(N);
-	//elements.push_back(6);
-	//std::cout << elements[0] << std::endl;
-	//this->it = elements.end();
-	it = elements.begin();
 }
 
 Span::Span(const Span& other)
@@ -32,60 +29,44 @@ Span::~Span()
 
 Span& Span::operator=(const Span& other)
 {
-	this->it = other.it;
-	this->elements = other.elements;
+	max_index = other.max_index;
+	elements = other.elements;
 	return (*this);
 }
 
 void Span::addNumber(unsigned int N)
 {
-	if (it != elements.end())
-		this->elements.insert(it, N);
+	if (elements.size() == max_index)
+		throw std::out_of_range("Span is full");
 	else
-	  	throw std::out_of_range("Span is full");
-	it++;
+		elements.push_back(N);
+	(void)N;
 }
 
 unsigned int Span::shortestSpan(void)
 {
-	// unsigned int smallest_diff = -1;
-
-	// if (it < 2)
-	// 	throw NotEnoughElements();
-	
-	// for (unsigned int i = 0; i < it; i++)
-	// {
-	// 	for (unsigned int j = 0; j < it; j++)
-	// 	{
-	// 		if (i != j)
-	// 		{
-	// 			if (elements[i] - elements[j] < smallest_diff)
-	// 				smallest_diff = elements[i] - elements[j];
-	// 		}
-	// 	}
-	// }
-	// return (smallest_diff);
-	return (0);
+	if (elements.size() < 2)
+		throw NotEnoughElements();
+	std::vector<unsigned int> sorted = elements;
+	std::sort(sorted.begin(), sorted.end());
+	unsigned int diff = sorted[0 + 1] - sorted[0];
+	for (unsigned int i = 0; i < sorted.size() - 1; i++)
+	{
+		if (sorted[i + 1]-sorted[i] < diff)
+			diff = sorted[i + 1]-sorted[i];
+	}
+	return (diff);
 }
 
 unsigned int Span::longestSpan(void)
 {
+	if (elements.size() < 2)
+		throw NotEnoughElements();
 
-	// unsigned int min = elements[0];
-	// unsigned int max = elements[0];
-	
-	// for (unsigned int i = 0; i < it; i++)
-	// {
-	// 	if (elements[i] < min)
-	// 		min = elements[i];
-	// }
-	// for (unsigned int i = 0; i < it; i++)
-	// {
-	// 	if (elements[i] > max)
-	// 		max = elements[i];
-	// }
-	// return (max - min);
-	return (0);
+	unsigned int min = *std::min_element(elements.begin(), elements.end());
+	unsigned int max = *std::max_element(elements.begin(), elements.end());
+
+	return (max - min);
 }
 
 const char* Span::NotEnoughElements::what() const throw()

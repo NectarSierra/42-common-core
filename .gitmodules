@@ -6,3 +6,7 @@
 	path = circle_04/cub3d
 	url = https://github.com/RomainBoland/cub3d.git
 	branch = main
+[submodule "circle_05/ft_irc"]
+	path = circle_05/ft_irc
+	url = https://github.com/Vlekzander/ft_irc.git
+	branch = main

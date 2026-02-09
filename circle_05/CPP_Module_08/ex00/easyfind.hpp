@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 09:17:15 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/02 13:55:18 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/02/09 08:39:39 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <iostream>
 #include <exception>
-#include <iterator>
+#include <algorithm>
 
 template<typename T>
 typename T::iterator easyfind(T, int);

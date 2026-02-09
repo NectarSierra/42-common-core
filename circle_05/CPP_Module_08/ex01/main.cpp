@@ -6,11 +6,17 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:09:19 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/09 09:39:08 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/02/09 12:29:03 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Span.hpp"
+
 int main(void)
 {
+	Span sp = Span(2);
+
+	sp.addNumber(1);
+	sp.addNumber(3);
 	return (0);
 }

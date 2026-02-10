@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:09:19 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/09 18:19:35 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/02/10 09:02:09 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(void)
 {
-	Span sp = Span(5);
+	Span sp = Span(1000);
 
 	sp.addNumber(6);
 	sp.addNumber(3);
@@ -28,5 +28,18 @@ int main(void)
 	
 	std::cout << sp.shortestSpan() << std::endl;
 	std::cout << sp.longestSpan() << std::endl;
+
+	std::vector<unsigned int> vect;
+	vect.push_back(6);
+	vect.push_back(3);
+	vect.push_back(17);
+	vect.push_back(9);
+	vect.push_back(11);
+	
+	sp.addRangeNumbers(vect.begin(), vect.end());
+	sp.addRangeNumbers(vect.begin(), vect.end());
+	sp.addRangeNumbers(vect.begin(), vect.end());
+
+	sp.printElements();
 	return (0);
 }

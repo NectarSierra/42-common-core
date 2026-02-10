@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:09:45 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/09 18:14:38 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/02/10 08:59:00 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ unsigned int Span::shortestSpan(void)
 	for (unsigned int i = 0; i < sorted.size() - 1; i++)
 	{
 		if (sorted[i + 1]-sorted[i] < diff)
-			diff = sorted[i + 1]-sorted[i];
+			diff = sorted[i + 1] - sorted[i];
 	}
 	return (diff);
 }
@@ -72,4 +72,25 @@ unsigned int Span::longestSpan(void)
 const char* Span::NotEnoughElements::what() const throw()
 {
 	return ("Not enough elements");
+}
+
+void Span::addRangeNumbers(std::vector<unsigned int>::iterator begin,
+						std::vector<unsigned int>::iterator end)
+{
+	for (std::vector<unsigned int>::iterator it = begin; it != end; it++)
+	{
+		if (elements.size() == max_index)
+			throw std::out_of_range("Span is full");
+		else
+			elements.push_back(*it);
+	}
+}
+
+void Span::printElements()
+{
+	for (std::vector<unsigned int>::iterator it = elements.begin(); it != elements.end(); it++)
+	{
+		std::cout << "[" << *it << "]";
+	}
+	std::cout << std::endl;
 }

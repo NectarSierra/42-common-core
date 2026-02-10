@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 09:09:34 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/09 18:23:06 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/02/10 08:56:47 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ class Span
 
 		void addRangeNumbers(std::vector<unsigned int>::iterator begin,
 							std::vector<unsigned int>::iterator end);
+
+		void printElements();
 
 	class NotEnoughElements : public std::exception
 	{

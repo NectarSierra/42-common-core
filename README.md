@@ -30,5 +30,5 @@ For assignments requiring additional context, a README is provided summarizing t
 
 Due to the use of submodules, you need to clone the repository using the following command:
 ```bash
-git clone --recurse-submodules https://github.com/NectarSierra/42-common-core.git
+git clone --recurse-submodules git@github.com:NectarSierra/42-common-core.git
 ```

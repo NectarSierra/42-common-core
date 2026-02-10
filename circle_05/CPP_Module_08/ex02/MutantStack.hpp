@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MutantStack.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 09:06:22 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/10 09:58:18 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/02/10 18:10:48 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 
 #include <stack>
 
-template <class T, class A = std::stack<T> >
-class MutantStack
+template <class T, class Container = std::deque<T> >
+class MutantStack : public std::stack<T, Container>
 {
 	private:
 	public:
-		MutantStack();
-		~MutantStack();
+		typedef typename Container::iterator iterator;
+		typedef typename Container::const_iterator const_iterator;
+		iterator begin();
+		const_iterator begin() const;
+		iterator end();
+		const_iterator end() const;
 };
 
 #include "MutantStack.tpp"

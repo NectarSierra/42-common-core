@@ -6,11 +6,11 @@
 #    By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/08 10:58:15 by nsaillez          #+#    #+#              #
-#    Updated: 2026/02/19 08:52:37 by nsaillez         ###   ########.fr        #
+#    Updated: 2026/02/19 12:01:05 by nsaillez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-COMP     = c++
+COMP     = c++ -g -fsanitize=address
 FLAGS    = -Wall -Wextra -Werror
 STD_FLAG = -std=c++98
 OUT_NAME = btc

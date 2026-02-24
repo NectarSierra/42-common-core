@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 13:00:04 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/24 12:58:47 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/02/24 14:06:46 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,19 @@ bool is_value_valid(std::string value)
 		}
 		if (isdigit(*it) == 0)
 		{
-			std::cerr << "\033[31mError:\033[0m Wrong value format\033[33m => \033[0m"<< value << std::endl;
+			std::cerr << "\033[31mError:\033[0m Bad value format\033[33m => \033[0m"<< value << std::endl;
 			return (false);
 		}
 	}
-
 	f_value = atof(value.c_str());
+	if (value.size() > 4 || f_value > 1000)
+	{
+		std::cerr << "\033[31mError:\033[0m Value is too large\033[33m => \033[0m"<< value << std::endl;
+		return (false);
+	}
 	if (f_value < 0)
 	{
-		std::cerr << "\033[31mError:\033[0m Not a positive number\033[33m => \033[0m"<< value << std::endl;
+		std::cerr << "\033[31mError:\033[0m Value is negative\033[33m => \033[0m"<< value << std::endl;
 		return (false);
 	}
 	return (true);
@@ -93,6 +97,25 @@ bool is_date_valid(std::string date)
 	if (tmp < 1 || tmp > 31)
 		return (false);
 	return (true);
+}
+
+std::pair<std::string, float> BitcoinExchange::mysearch(std::string date_search)
+{
+	std::map<std::string, float>::iterator it;
+	it = btc_history_db.find(date_search);
+	if (it == btc_history_db.end())
+	{
+		//std::cerr << "\033[33m" << "[Debug Warning] " << "\033[0m" << "Could not find element. Returning the lower closest one." << std::endl;
+		it = btc_history_db.lower_bound(date_search);
+		if (it == btc_history_db.end())
+		{
+			it--;
+			return (*it);
+		}
+		if (it != btc_history_db.begin())
+			it--;
+	}
+	return (*it);
 }
 
 BitcoinExchange::BitcoinExchange(const std::string db_path, const std::string input) : db_path(db_path)
@@ -149,23 +172,13 @@ BitcoinExchange::BitcoinExchange(const std::string db_path, const std::string in
 			//std::cerr << "\033[31mError:\033[0m Bad Value\033[33m => \033[0m"<< value << std::endl;
 			continue;
 		}
-		std::cout << line << std::endl;
+		std::cout << date << " " << mysearch(date).first << " \033[30m=>\033[0m "  << value << " \033[30m=\033[0m " << mysearch(date).second*atof(value.c_str()) << std::endl;
+		
 	}
 
 	/* -------------------------------------------- */
 
-	// std::string search = "2022-03-30";
-	// std::map<std::string, float>::iterator it;
-	// it = btc_history_db.find(search);
-	// if (it == btc_history_db.end())
-	// {
-	// 	std::cerr << "\033[33m" << "[Debug Warning] " << "\033[0m" << "Could not find element. Returning the lower closest one." << std::endl;
-	// 	it = btc_history_db.lower_bound(search);
-	// 	if (it == btc_history_db.end())
-	// 		it--;
-	// }
-	// std::cout << "DATE: " << it->first << std::endl;
-	// std::cout << "EXCHANGE_R: " << it->second << std::endl;
+	
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)

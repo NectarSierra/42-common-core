@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 13:00:21 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/19 13:30:10 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/02/24 08:35:13 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ private:
 	const std::string				db_path;
 	std::map<std::string, float>	btc_history_db;
 public:
-	BitcoinExchange(const std::string db_path);
+	BitcoinExchange(const std::string db_path, const std::string input);
 	BitcoinExchange(const BitcoinExchange& other);
 	~BitcoinExchange();
 	BitcoinExchange& operator=(const BitcoinExchange& other);

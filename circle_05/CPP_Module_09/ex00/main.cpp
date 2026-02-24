@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:14:41 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/19 13:29:26 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/02/24 08:34:25 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		BitcoinExchange test("data.csv");
+		BitcoinExchange test("data.csv", argv[1]);
 		(void)argv;
 	}
 }

@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+         #
+#    By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/08 10:58:15 by nsaillez          #+#    #+#              #
-#    Updated: 2026/02/19 13:15:06 by nsaillez         ###   ########.fr        #
+#    Updated: 2026/04/15 15:11:03 by nsaillez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-COMP     = c++ -g -fsanitize=address
+COMP     = c++
 FLAGS    = -Wall -Wextra -Werror
 STD_FLAG = -std=c++98
 OUT_NAME = btc

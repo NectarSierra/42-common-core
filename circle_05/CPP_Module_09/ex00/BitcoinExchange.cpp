@@ -3,24 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 13:00:04 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/24 14:06:46 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/04/15 11:52:38 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-std::pair<std::string, float> BitcoinExchange::get_pair(std::ifstream& f_stream)
+std::pair<std::string, float> get_pair_from_line(const std::string& line)
 {
-	std::string date = "";
-	std::string exch_rate_s = "";
-	float 		exch_rate = 0;
+	std::size_t comma = line.find(',');
 
-	getline(f_stream, date, ',');
-	getline(f_stream, exch_rate_s);
-	exch_rate = atof(exch_rate_s.c_str());
+	if (comma == std::string::npos)
+		return (std::pair<std::string, float>("", 0));
+
+	std::string date = line.substr(0, comma);
+	std::string exch_rate_s = line.substr(comma + 1);
+
+	float exch_rate = atof(exch_rate_s.c_str());
+
 	return (std::pair<std::string, float>(date, exch_rate));
 }
 
@@ -103,9 +106,10 @@ std::pair<std::string, float> BitcoinExchange::mysearch(std::string date_search)
 {
 	std::map<std::string, float>::iterator it;
 	it = btc_history_db.find(date_search);
+
 	if (it == btc_history_db.end())
 	{
-		//std::cerr << "\033[33m" << "[Debug Warning] " << "\033[0m" << "Could not find element. Returning the lower closest one." << std::endl;
+		// std::cerr << "\033[33m" << "[Debug Warning] " << "\033[0m" << "Could not find element. Returning the lower closest one." << std::endl;
 		it = btc_history_db.lower_bound(date_search);
 		if (it == btc_history_db.end())
 		{
@@ -129,7 +133,7 @@ BitcoinExchange::BitcoinExchange(const std::string db_path, const std::string in
 	}
 	getline(db_stream, line); /* skip 1st line */
 	while (getline(db_stream, line))
-		btc_history_db.insert(get_pair(db_stream));
+   		btc_history_db.insert(get_pair_from_line(line));
 
 	/* -------------------------------------------- */
 

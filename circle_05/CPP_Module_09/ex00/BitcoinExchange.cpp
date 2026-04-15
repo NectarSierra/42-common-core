@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 13:00:04 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/04/15 11:52:38 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/04/15 15:03:56 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 std::pair<std::string, float> get_pair_from_line(const std::string& line)
 {
-	std::size_t comma = line.find(',');
-
+	std::size_t comma;
+	
+	comma = line.find(',');
 	if (comma == std::string::npos)
 		return (std::pair<std::string, float>("", 0));
-
 	std::string date = line.substr(0, comma);
 	std::string exch_rate_s = line.substr(comma + 1);
-
 	float exch_rate = atof(exch_rate_s.c_str());
-
 	return (std::pair<std::string, float>(date, exch_rate));
 }
 
@@ -34,7 +32,6 @@ bool str_isdigit(std::string input)
 		if (isdigit(*it) == 0)
 			return (false);
 	}
-	
 	return (true);
 }
 
@@ -63,7 +60,7 @@ bool is_value_valid(std::string value)
 		}
 	}
 	f_value = atof(value.c_str());
-	if (value.size() > 4 || f_value > 1000)
+	if (f_value > 1000)
 	{
 		std::cerr << "\033[31mError:\033[0m Value is too large\033[33m => \033[0m"<< value << std::endl;
 		return (false);
@@ -105,8 +102,8 @@ bool is_date_valid(std::string date)
 std::pair<std::string, float> BitcoinExchange::mysearch(std::string date_search)
 {
 	std::map<std::string, float>::iterator it;
-	it = btc_history_db.find(date_search);
 
+	it = btc_history_db.find(date_search);
 	if (it == btc_history_db.end())
 	{
 		// std::cerr << "\033[33m" << "[Debug Warning] " << "\033[0m" << "Could not find element. Returning the lower closest one." << std::endl;
@@ -143,6 +140,7 @@ BitcoinExchange::BitcoinExchange(const std::string db_path, const std::string in
 	std::string		year;
 	std::string		month;
 	std::string		day;
+	std::pair<std::string, float> result;
 	
 	std::ifstream	input_stream(input.c_str());
 	if (!input_stream)
@@ -153,36 +151,25 @@ BitcoinExchange::BitcoinExchange(const std::string db_path, const std::string in
 	getline(input_stream, line); /* skip 1st line */
 	while (getline(input_stream, line))
 	{
-		
 		std::size_t found = line.find(" | ");
 		if (found == std::string::npos)
 		{
 			std::cerr << "\033[31mError:\033[0m Bad input\033[33m => \033[0m"<< line << std::endl;
 			continue;
 		}
-		
 		date = line.substr(0, found);
 		value = line.substr(found + 3);
-		
-		//std::cout << "date: " << date << std::endl;
-		//std::cout << "value: " << value << std::endl;
 		if (!is_date_valid(date))
 		{
 			std::cerr << "\033[31mError:\033[0m Bad date format\033[33m => \033[0m"<< date << std::endl;
 			continue;
 		}
 		if (!is_value_valid(value))
-		{
-			//std::cerr << "\033[31mError:\033[0m Bad Value\033[33m => \033[0m"<< value << std::endl;
 			continue;
-		}
-		std::cout << date << " " << mysearch(date).first << " \033[30m=>\033[0m "  << value << " \033[30m=\033[0m " << mysearch(date).second*atof(value.c_str()) << std::endl;
+		result = mysearch(date);
+		std::cout << date << " " << result.first << " \033[30m=>\033[0m "  << value << " \033[30m=\033[0m " << result.second*atof(value.c_str()) << std::endl;
 		
 	}
-
-	/* -------------------------------------------- */
-
-	
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)

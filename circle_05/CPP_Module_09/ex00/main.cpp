@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 09:14:41 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/02/24 08:34:25 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/04/19 12:09:49 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ int main(int argc, char **argv)
 		std::cerr << "\033[31m" << "[Error] " << "\033[0m" << "Wrong usage of program, please use => ./btc [FILE]" << std::endl;
 		return (-1);
 	}
-	else
-	{
-		BitcoinExchange test("data.csv", argv[1]);
-		(void)argv;
-	}
+	BitcoinExchange test("data.csv", argv[1]);
+	return (0);
 }

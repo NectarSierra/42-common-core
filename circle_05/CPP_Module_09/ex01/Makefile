@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+         #
+#    By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/08 10:58:15 by nsaillez          #+#    #+#              #
-#    Updated: 2026/02/19 08:53:29 by nsaillez         ###   ########.fr        #
+#    Updated: 2026/04/20 09:05:20 by nsaillez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ FLAGS    = -Wall -Wextra -Werror
 STD_FLAG = -std=c++98
 OUT_NAME = RPN
 
-SRCS     = main.cpp
+SRCS     = main.cpp\
+		   RPN.cpp
 
 OBJ_DIR  = objs
 OBJS     = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)

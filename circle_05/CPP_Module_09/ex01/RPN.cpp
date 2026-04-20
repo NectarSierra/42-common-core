@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 12:28:18 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/04/20 13:59:49 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:26:56 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,10 @@ void RPN::calculate()
 			switch (c)
 			{
 			case '+':
-				temp.push(a + b); break;
+				temp.push(b + a); break;
 			case '-':
-				temp.push(a - b); break;
+				temp.push(b - a); break;
 			}
-			std::cout << "RESULT: " << temp.top() << std::endl;
 		}
 		else if (isdigit(expr[i]))
 		{
@@ -89,4 +88,10 @@ void RPN::calculate()
 			break;	
 		}
 	}
+	if ((expr.size() + 1) % 2)
+		std::cerr << "\033[31m" << "Error: RPN has to be finished by either a digit or an operator" << "\033[0m" << std::endl;
+	if (temp.size() - 1 != 0)
+		std::cerr << "\033[31m" << "digit are missing operator" << "\033[0m" << std::endl;
+	else
+		std::cout << "Result: " << temp.top() << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 12:28:18 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/04/20 11:28:06 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/04/20 13:59:49 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,52 @@ RPN::~RPN()
 
 void RPN::calculate()
 {
-	char token_type[] = {'+', '-', '*', '/'};
+	int a;
+	int b;
+	char c;
 	std::stack<int> temp;
 	
 	for (size_t i = 0; i < expr.size(); i++)
 	{
-		std::cout << "'" << expr[i] << "'" << " ";
-		for (size_t j = 0; j < sizeof(token_type) / sizeof(token_type[0]); j++)
+		c = expr[i];
+		//std::cout << "'" << expr[i] << "' ";
+		if (i % 2)
 		{
-			if (expr[i] == token_type[j])
+			if (c != ' ')
 			{
-				std::cout << "is a token" << std::endl;
-				// look if there is at least 2 digit in the stack? if not error, if yes do operation remove from stack and push the result to stack.
-				continue;
+				std::cerr << "\033[31m" << "Error: space missing between digit/operator" << "\033[0m" << std::endl; return;
+				break;
 			}
 		}
-		if (isdigit(expr[i]))
+		else if (c == '+' || c == '-' || c == '*' || c == '/')
+		{
+			std::cout << "is a token" << std::endl;
+			if (temp.size() < 2)
+			{
+				std::cerr << "\033[31m" << "Error: not enough digit for the operation" << "\033[0m" << std::endl; return;
+			}
+			a = temp.top();
+			temp.pop();
+			b = temp.top();
+			temp.pop();
+			switch (c)
+			{
+			case '+':
+				temp.push(a + b); break;
+			case '-':
+				temp.push(a - b); break;
+			}
+			std::cout << "RESULT: " << temp.top() << std::endl;
+		}
+		else if (isdigit(expr[i]))
 		{
 			std::cout << "is a digit" << std::endl;
-			temp.push(static_cast<int>(expr[i] - '0'));
-			continue;
+			temp.push(expr[i] - '0');
 		}
-		std::cerr << "\033[31m" << "is neither a digit or a token, operation cancelled." << "\033[0m" << std::endl;
-		break;
+		else
+		{
+			std::cerr << "\033[31m" << "is neither a digit or a token, operation cancelled." << "\033[0m" << std::endl;
+			break;	
+		}
 	}
-	
 }

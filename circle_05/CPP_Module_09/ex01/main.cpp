@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 12:13:47 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/04/20 09:15:46 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/04/20 09:39:15 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int main(int argc, char** argv)
 		return (1);
 	}
 	std::string str(argv[1]);
+	
 	RPN test(str);
+	test.calculate();
 	return (0);
 }

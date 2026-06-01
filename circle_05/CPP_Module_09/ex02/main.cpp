@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/09 13:19:19 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/05/21 11:21:59 by nsaillez         ###   ########.fr       */
+/*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
+/*   Updated: 2026/05/21 15:32:27 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,44 @@ struct pairs
 	int smallest;
 };
 
-std::vector<pairs> rec_largest(std::vector<pairs>& arr, size_t stack_size)
+std::vector<pairs> merge(std::vector<pairs> left, std::vector<pairs> right)
 {
-	int count = 0;
-	
-	for (size_t i = 0; i < arr.size(); i += 2)
-	{
-		if (arr[count].largest < arr[(count + stack_size)].largest)
-		{
-			std::cout << count << "<->" << (count + stack_size) << std::endl;
-			std::swap(arr[count].largest, arr[(count + stack_size)].largest);
-		}
-		count += (stack_size*2);
-	}
-	if (stack_size < arr.size())
-		return(rec_largest(arr, (stack_size * 2)));
-	return (arr);
+    std::vector<pairs> res;
+
+    size_t i = 0;
+    size_t j = 0;
+
+    while (i < left.size() && j < right.size())
+    {
+        if (left[i].largest < right[j].largest)
+            res.push_back(left[i++]);
+        else
+            res.push_back(right[j++]);
+    }
+
+    while (i < left.size())
+        res.push_back(left[i++]);
+
+    while (j < right.size())
+        res.push_back(right[j++]);
+
+    return res;
+}
+
+std::vector<pairs> rec_largest(std::vector<pairs> arr)
+{
+    if (arr.size() <= 1)
+        return arr;
+
+    size_t mid = arr.size() / 2;
+
+    std::vector<pairs> left(arr.begin(), arr.begin() + mid);
+    std::vector<pairs> right(arr.begin() + mid, arr.end());
+
+    left = rec_largest(left);
+    right = rec_largest(right);
+
+    return merge(left, right);
 }
 
 int	main(int argc, char **argv)
@@ -124,14 +146,15 @@ int	main(int argc, char **argv)
 			tmp.largest = -1; // since undefined -1
 			tmp.smallest = unsorted_numbers[i];
 		}
-		std::cout << "(" << tmp.largest << ", " << tmp.smallest << ")" << std::endl;
+		std::cout << "(" << tmp.smallest << ", " << tmp.largest << ")" << std::endl;
 		arr1.push_back(tmp);
 	}
-	rec_largest(arr1, 1);
-	for (size_t i = 0; i < arr1.size(); i++)
+	std::vector<pairs> res = rec_largest(arr1);
+	for (size_t i = 0; i < res.size(); i++)
 	{
-		std::cout << "(" << arr1[i].largest << ", " << arr1[i].smallest << ")" << std::endl;
+		std::cout << "(" << res[i].smallest << ", " << res[i].largest << ")" << std::endl;
 	}
+	
 	// tris of largest (recursive)
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/05/21 15:32:27 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/06/11 08:38:15 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ std::vector<pairs> merge(std::vector<pairs> left, std::vector<pairs> right)
     while (j < right.size())
         res.push_back(right[j++]);
 
-    return res;
+    return (res);
 }
 
 std::vector<pairs> rec_largest(std::vector<pairs> arr)
@@ -103,7 +103,7 @@ std::vector<pairs> rec_largest(std::vector<pairs> arr)
     left = rec_largest(left);
     right = rec_largest(right);
 
-    return merge(left, right);
+    return (merge(left, right));
 }
 
 int	main(int argc, char **argv)
@@ -122,10 +122,9 @@ int	main(int argc, char **argv)
 		std::cout << " " << unsorted_numbers[i];
 	std::cout << std::endl;
 
-	
-	// pairs
 	std::vector<pairs> arr1;
 	pairs tmp;
+	int	unpaired = -1;
 	for (size_t i = 0; i < unsorted_numbers.size(); i += 2)
 	{
 		if (i + 1 != unsorted_numbers.size())
@@ -140,21 +139,19 @@ int	main(int argc, char **argv)
 				tmp.largest = unsorted_numbers[i + 1];
 				tmp.smallest = unsorted_numbers[i];
 			}
+			arr1.push_back(tmp);
 		}
 		else
-		{
-			tmp.largest = -1; // since undefined -1
-			tmp.smallest = unsorted_numbers[i];
-		}
-		std::cout << "(" << tmp.smallest << ", " << tmp.largest << ")" << std::endl;
-		arr1.push_back(tmp);
+			unpaired = unsorted_numbers[i];
 	}
 	std::vector<pairs> res = rec_largest(arr1);
-	for (size_t i = 0; i < res.size(); i++)
+	for (size_t i = 0; i < (res.size()); i++)
 	{
 		std::cout << "(" << res[i].smallest << ", " << res[i].largest << ")" << std::endl;
 	}
-	
-	// tris of largest (recursive)
+	if (unpaired != -1)
+	{
+		std::cout << "Unpaired: " << unpaired << std::endl;
+	}
 	return (0);
 }

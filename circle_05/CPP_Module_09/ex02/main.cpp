@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/11 12:18:52 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/11 12:36:39 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,18 +186,19 @@ int	main(int argc, char **argv)
 	main_chain.insert(main_chain.begin(), res[0].smallest);
 	
 	std::vector<int> jac_seq;
+	int highest;
+	int lowest;
+	
 	jac_seq = jacobsthal_sequence(res.size());
 	for (size_t i = 2; jac_seq[i] < (int)res.size(); i++)
 	{
-		if ((jac_seq[i+1]-1)> (int)res.size()-1)
-		{
-			std::cout << "DEBUG" << std::endl;
-			std::cout << jac_seq[i+1]-1 << "..." << jac_seq[i] << std::endl;
-			std::cout << res[res.size()-1].smallest << "->" << res[jac_seq[i]].smallest << std::endl;
-			break;
-		}
-		std::cout << jac_seq[i+1]-1 << "..." << jac_seq[i] << std::endl;
-		std::cout << res[jac_seq[i+1]-1].smallest << "->" << res[jac_seq[i]].smallest << std::endl;
+		highest = jac_seq[i+1]-1; 
+		lowest = jac_seq[i];
+		if (highest > (int)res.size()-1)
+			highest = res.size()-1;
+		
+		std::cout << highest << "..." << lowest << std::endl;
+		std::cout << res[highest].smallest << "->" << res[lowest].smallest << std::endl;
 	}
 	
 	return (0);

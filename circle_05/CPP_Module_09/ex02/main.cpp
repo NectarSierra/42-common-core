@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/11 08:34:25 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/11 09:08:20 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,20 @@ std::vector<pairs> create_pairs(std::vector<int>& unsorted_numbers, int& unpaire
 	return (arr1);
 }
 
+std::vector<int> jacobsthal_sequence(int n)
+{
+    std::vector<int> seq;
+    seq.push_back(0);
+    seq.push_back(1);
+
+	while(seq.back() < n)
+    {
+        int next = seq[seq.size()-1] + 2 * seq[seq.size()-2];
+        seq.push_back(next);
+    }
+    return (seq);
+}
+
 int	main(int argc, char **argv)
 {
 	if (argc < 2)
@@ -162,5 +176,15 @@ int	main(int argc, char **argv)
 	{
 		std::cout << "Unpaired: " << unpaired << std::endl;
 	}
+
+	std::vector<int> main_chain;
+	for (size_t i = 0; i < res.size(); i++)
+		main_chain.push_back(res[i].largest);
+
+	main_chain.insert(main_chain.begin(), res[0].smallest);
+	std::cout << jacobsthal_sequence(6).size();
+
+	std::cout << jacobsthal_sequence(6)[5];
+	
 	return (0);
 }

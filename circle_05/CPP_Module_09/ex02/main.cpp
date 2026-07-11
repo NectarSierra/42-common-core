@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/06/11 08:38:15 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/11 08:34:25 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,25 +106,10 @@ std::vector<pairs> rec_largest(std::vector<pairs> arr)
     return (merge(left, right));
 }
 
-int	main(int argc, char **argv)
+std::vector<pairs> create_pairs(std::vector<int>& unsorted_numbers, int& unpaired)
 {
-	if (argc < 2)
-	{
-		std::cerr << "\033[31mError: Wrong use of program!\033[0m" << std::endl;
-		return (1);
-	}
-	std::vector<int> unsorted_numbers;
-	if (parser(argc, argv, unsorted_numbers))
-		return (-1);
-	
-	std::cout << "Before:";
-	for (int i = 0; i < argc - 1; i++)
-		std::cout << " " << unsorted_numbers[i];
-	std::cout << std::endl;
-
 	std::vector<pairs> arr1;
 	pairs tmp;
-	int	unpaired = -1;
 	for (size_t i = 0; i < unsorted_numbers.size(); i += 2)
 	{
 		if (i + 1 != unsorted_numbers.size())
@@ -144,6 +129,30 @@ int	main(int argc, char **argv)
 		else
 			unpaired = unsorted_numbers[i];
 	}
+	return (arr1);
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc < 2)
+	{
+		std::cerr << "\033[31mError: Wrong use of program!\033[0m" << std::endl;
+		return (1);
+	}
+	std::vector<int> unsorted_numbers;
+	if (parser(argc, argv, unsorted_numbers))
+		return (-1);
+	
+	std::cout << "Before:";
+	for (int i = 0; i < argc - 1; i++)
+		std::cout << " " << unsorted_numbers[i];
+	std::cout << std::endl;
+
+
+	int	unpaired = -1;
+	std::vector<pairs> arr1;
+	arr1 = create_pairs(unsorted_numbers, unpaired);
+	
 	std::vector<pairs> res = rec_largest(arr1);
 	for (size_t i = 0; i < (res.size()); i++)
 	{

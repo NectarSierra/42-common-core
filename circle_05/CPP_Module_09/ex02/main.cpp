@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/19 13:26:51 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/19 13:34:04 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ int	main(int argc, char **argv)
 
 	std::vector<int>::iterator it;
 	
-	for (size_t i = 2; jac_seq[i] < (int)res.size(); i++)
+	for (size_t i = 2; jac_seq[i] < (int)res.size() && res.size() > 0; i++)
 	{
 		highest = jac_seq[i+1]-1; 
 		lowest = jac_seq[i];
@@ -245,8 +245,15 @@ int	main(int argc, char **argv)
 	}
 	if (unpaired != -1)
 	{
-		it = main_chain.begin() + binary_sort(main_chain, unpaired);
-		main_chain.insert(it, unpaired);
+		if (main_chain.size() == 0)
+		{
+			main_chain.insert(main_chain.begin(), unpaired);
+		}
+		else
+		{			
+			it = main_chain.begin() + binary_sort(main_chain, unpaired);
+			main_chain.insert(it, unpaired);
+		}
 	}
 
 	for (size_t i = 0; i < main_chain.size(); i++)

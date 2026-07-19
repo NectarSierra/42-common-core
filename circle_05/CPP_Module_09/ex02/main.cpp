@@ -6,9 +6,11 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/19 13:34:04 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/19 16:36:18 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "PmergeMe.hpp"
 
 #include <iostream>
 #include <cerrno>
@@ -59,12 +61,6 @@ int parser(int argc, char** argv, std::vector<int> &arr)
 	}
 	return (0);
 }
-
-struct pairs
-{
-	int largest;
-	int smallest;
-};
 
 std::vector<pairs> merge(std::vector<pairs> left, std::vector<pairs> right)
 {
@@ -134,12 +130,13 @@ std::vector<pairs> create_pairs(std::vector<int>& unsorted_numbers, int& unpaire
 
 std::vector<int> jacobsthal_sequence(int n)
 {
-	std::cout << "here" << std::endl;
     std::vector<int> seq;
+	
     seq.push_back(0);
     seq.push_back(1);
-
-	while(seq.back() < n +3)
+	if (n < 2)
+		n = 2;
+	while(seq.back() < n)
     {
         int next = seq[seq.size()-1] + 2 * seq[seq.size()-2];
         seq.push_back(next);
@@ -154,33 +151,26 @@ int binary_sort(std::vector<int> main_chain, int n)
 	int high;
 	int mid;
 
-	std::cout << "MAIN_CHAIN:";
 	for (size_t i = 0; i < main_chain.size(); i++)
-		std::cout << " " <<main_chain[i];
-	std::cout<<std::endl;
-	
 	low = 0;
 	high = main_chain.size();
-	mid = main_chain[(low+high)/2];
 	while (high != low)
 	{
 		mid = main_chain[(low+high)/2];
-		std::cout << "LOW:" << low << std::endl;
-		std::cout << "HIGH:" << high << std::endl;
-		std::cout << "MID:" << mid << std::endl;
-		std::cout << "N:" << n << std::endl;
-		
 		if (n > mid)
 			low = (low+high)/2+1;
 		else
 			high = (low+high)/2;
 	}
-	std::cout << "returned: " << low << std::endl;
 	return (low);
 }
 
+#include <sys/time.h>
+#include <list>
+
 int	main(int argc, char **argv)
 {
+	timeval start, end;
 	if (argc < 2)
 	{
 		std::cerr << "\033[31mError: Wrong use of program!\033[0m" << std::endl;
@@ -190,25 +180,21 @@ int	main(int argc, char **argv)
 	if (parser(argc, argv, unsorted_numbers))
 		return (-1);
 	
+	/*--------------------------------------------------------------*/
+	
 	std::cout << "Before:";
 	for (int i = 0; i < argc - 1; i++)
 		std::cout << " " << unsorted_numbers[i];
 	std::cout << std::endl;
 
-
 	int	unpaired = -1;
 	std::vector<pairs> arr1;
+	// std::list<pairs> arr2;
 	arr1 = create_pairs(unsorted_numbers, unpaired);
+	// arr2 = create_pairs(unsorted_numbers, unpaired);
 	
+	gettimeofday(&start, NULL);
 	std::vector<pairs> res = rec_largest(arr1);
-	for (size_t i = 0; i < (res.size()); i++)
-	{
-		std::cout << "(" << res[i].smallest << ", " << res[i].largest << ")" << std::endl;
-	}
-	if (unpaired != -1)
-	{
-		std::cout << "Unpaired: " << unpaired << std::endl;
-	}
 
 	/* ------------------------------------------------------------ */
 
@@ -240,26 +226,28 @@ int	main(int argc, char **argv)
 			main_chain.insert(it, res[j].smallest);
 		}
 		
-		std::cout << highest << "..." << lowest << std::endl;
-		std::cout << res[highest].smallest << "->" << res[lowest].smallest << std::endl;
+		// std::cout << highest << "..." << lowest << std::endl;
+		// std::cout << res[highest].smallest << "->" << res[lowest].smallest << std::endl;
 	}
 	if (unpaired != -1)
 	{
 		if (main_chain.size() == 0)
-		{
 			main_chain.insert(main_chain.begin(), unpaired);
-		}
 		else
 		{			
 			it = main_chain.begin() + binary_sort(main_chain, unpaired);
 			main_chain.insert(it, unpaired);
 		}
 	}
-
+	gettimeofday(&end, NULL);
+	long long us = (end.tv_sec - start.tv_sec) * 1000000LL + (end.tv_usec - start.tv_usec);
+	
+	std::cout << "After:  ";
 	for (size_t i = 0; i < main_chain.size(); i++)
-	{
 		std::cout << main_chain[i] << " ";
-	}
 	std::cout << std::endl;
+
+	std::cout << "Time to process a range of " << main_chain.size() << " elements with \033[32mstd::vector\033[0m : "<< us << " us" << std::endl;
+	
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/19 12:12:52 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/19 13:04:18 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,38 @@ std::vector<int> jacobsthal_sequence(int n)
     return (seq);
 }
 
+
+int binary_sort(std::vector<int> main_chain, int n)
+{
+	int low;
+	int high;
+	int mid;
+
+	std::cout << "MAIN_CHAIN:";
+	for (size_t i = 0; i < main_chain.size(); i++)
+		std::cout << " " <<main_chain[i];
+	std::cout<<std::endl;
+	
+	low = 0;
+	high = main_chain.size()-1;
+	mid = main_chain[(low+high)/2];
+	while (high != low)
+	{
+		mid = main_chain[(low+high)/2];
+		std::cout << "LOW:" << low << std::endl;
+		std::cout << "HIGH:" << high << std::endl;
+		std::cout << "MID:" << mid << std::endl;
+		std::cout << "N:" << n << std::endl;
+		
+		if (n > mid)
+			low = (low+high)/2+1;
+		else
+			high = (low+high)/2;
+	}
+	std::cout << "returned: " << (low+high/2) << std::endl;
+	return ((low+high/2));
+}
+
 int	main(int argc, char **argv)
 {
 	if (argc < 2)
@@ -204,5 +236,8 @@ int	main(int argc, char **argv)
 		std::cout << res[highest].smallest << "->" << res[lowest].smallest << std::endl;
 	}
 	
+	std::vector<int>::iterator it;
+	it = main_chain.begin() + binary_sort(main_chain, 3);
+	main_chain.insert(it, 3);
 	return (0);
 }

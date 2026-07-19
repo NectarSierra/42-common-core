@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/19 13:04:18 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/19 13:19:58 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,8 +175,8 @@ int binary_sort(std::vector<int> main_chain, int n)
 		else
 			high = (low+high)/2;
 	}
-	std::cout << "returned: " << (low+high/2) << std::endl;
-	return ((low+high/2));
+	std::cout << "returned: " << low << std::endl;
+	return (low);
 }
 
 int	main(int argc, char **argv)
@@ -225,6 +225,8 @@ int	main(int argc, char **argv)
 	
 	jac_seq = jacobsthal_sequence(res.size());
 
+	std::vector<int>::iterator it;
+	
 	for (size_t i = 2; jac_seq[i] < (int)res.size(); i++)
 	{
 		highest = jac_seq[i+1]-1; 
@@ -232,12 +234,20 @@ int	main(int argc, char **argv)
 		if (highest > (int)res.size()-1)
 			highest = res.size()-1;
 		
+		for (int j = highest; j >= lowest; j--)
+		{
+			it = main_chain.begin() + binary_sort(main_chain, res[j].smallest);
+			main_chain.insert(it, res[j].smallest);
+		}
+		
 		std::cout << highest << "..." << lowest << std::endl;
 		std::cout << res[highest].smallest << "->" << res[lowest].smallest << std::endl;
 	}
-	
-	std::vector<int>::iterator it;
-	it = main_chain.begin() + binary_sort(main_chain, 3);
-	main_chain.insert(it, 3);
+
+	for (size_t i = 0; i < main_chain.size(); i++)
+	{
+		std::cout << main_chain[i] << " ";
+	}
+	std::cout << std::endl;
 	return (0);
 }

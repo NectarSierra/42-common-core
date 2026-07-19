@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/19 13:19:58 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/19 13:26:51 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ int binary_sort(std::vector<int> main_chain, int n)
 	std::cout<<std::endl;
 	
 	low = 0;
-	high = main_chain.size()-1;
+	high = main_chain.size();
 	mid = main_chain[(low+high)/2];
 	while (high != low)
 	{
@@ -242,6 +242,11 @@ int	main(int argc, char **argv)
 		
 		std::cout << highest << "..." << lowest << std::endl;
 		std::cout << res[highest].smallest << "->" << res[lowest].smallest << std::endl;
+	}
+	if (unpaired != -1)
+	{
+		it = main_chain.begin() + binary_sort(main_chain, unpaired);
+		main_chain.insert(it, unpaired);
 	}
 
 	for (size_t i = 0; i < main_chain.size(); i++)

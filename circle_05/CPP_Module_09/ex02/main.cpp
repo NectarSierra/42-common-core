@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/19 16:36:18 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/20 13:36:41 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include <iostream>
 #include <cerrno>
 #include <cstdlib>
-#include <vector>
 #include <string_view>
+#include <sys/time.h>
 
 int strtol_checker(char *str)
 {
@@ -62,72 +62,6 @@ int parser(int argc, char** argv, std::vector<int> &arr)
 	return (0);
 }
 
-std::vector<pairs> merge(std::vector<pairs> left, std::vector<pairs> right)
-{
-    std::vector<pairs> res;
-
-    size_t i = 0;
-    size_t j = 0;
-
-    while (i < left.size() && j < right.size())
-    {
-        if (left[i].largest < right[j].largest)
-            res.push_back(left[i++]);
-        else
-            res.push_back(right[j++]);
-    }
-
-    while (i < left.size())
-        res.push_back(left[i++]);
-
-    while (j < right.size())
-        res.push_back(right[j++]);
-
-    return (res);
-}
-
-std::vector<pairs> rec_largest(std::vector<pairs> arr)
-{
-    if (arr.size() <= 1)
-        return arr;
-
-    size_t mid = arr.size() / 2;
-
-    std::vector<pairs> left(arr.begin(), arr.begin() + mid);
-    std::vector<pairs> right(arr.begin() + mid, arr.end());
-
-    left = rec_largest(left);
-    right = rec_largest(right);
-
-    return (merge(left, right));
-}
-
-std::vector<pairs> create_pairs(std::vector<int>& unsorted_numbers, int& unpaired)
-{
-	std::vector<pairs> arr1;
-	pairs tmp;
-	for (size_t i = 0; i < unsorted_numbers.size(); i += 2)
-	{
-		if (i + 1 != unsorted_numbers.size())
-		{
-			if (unsorted_numbers[i] > unsorted_numbers[i + 1])
-			{
-				tmp.largest = unsorted_numbers[i];
-				tmp.smallest = unsorted_numbers[i + 1];
-			}
-			else
-			{
-				tmp.largest = unsorted_numbers[i + 1];
-				tmp.smallest = unsorted_numbers[i];
-			}
-			arr1.push_back(tmp);
-		}
-		else
-			unpaired = unsorted_numbers[i];
-	}
-	return (arr1);
-}
-
 std::vector<int> jacobsthal_sequence(int n)
 {
     std::vector<int> seq;
@@ -144,33 +78,9 @@ std::vector<int> jacobsthal_sequence(int n)
     return (seq);
 }
 
-
-int binary_sort(std::vector<int> main_chain, int n)
-{
-	int low;
-	int high;
-	int mid;
-
-	for (size_t i = 0; i < main_chain.size(); i++)
-	low = 0;
-	high = main_chain.size();
-	while (high != low)
-	{
-		mid = main_chain[(low+high)/2];
-		if (n > mid)
-			low = (low+high)/2+1;
-		else
-			high = (low+high)/2;
-	}
-	return (low);
-}
-
-#include <sys/time.h>
-#include <list>
-
 int	main(int argc, char **argv)
 {
-	timeval start, end;
+	timeval start, end, start2, end2;
 	if (argc < 2)
 	{
 		std::cerr << "\033[31mError: Wrong use of program!\033[0m" << std::endl;
@@ -180,67 +90,38 @@ int	main(int argc, char **argv)
 	if (parser(argc, argv, unsorted_numbers))
 		return (-1);
 	
-	/*--------------------------------------------------------------*/
 	
 	std::cout << "Before:";
 	for (int i = 0; i < argc - 1; i++)
 		std::cout << " " << unsorted_numbers[i];
 	std::cout << std::endl;
+	
+	std::vector<pairs> arr1;
+	std::deque<pairs> arr2;
+	
+	PmergeMe<std::vector<pairs> > vecArr(arr1);
+	PmergeMe<std::deque<pairs> > dequeArr(arr2);
 
 	int	unpaired = -1;
-	std::vector<pairs> arr1;
-	// std::list<pairs> arr2;
-	arr1 = create_pairs(unsorted_numbers, unpaired);
-	// arr2 = create_pairs(unsorted_numbers, unpaired);
+	
+	vecArr.create_pairs(unsorted_numbers, unpaired);
+	dequeArr.create_pairs(unsorted_numbers, unpaired);
 	
 	gettimeofday(&start, NULL);
-	std::vector<pairs> res = rec_largest(arr1);
-
-	/* ------------------------------------------------------------ */
-
-	std::vector<int> main_chain;
-	for (size_t i = 0; i < res.size(); i++)
-		main_chain.push_back(res[i].largest);
-	
-	if (res.size() != 0)
-		main_chain.insert(main_chain.begin(), res[0].smallest);
-	
-	std::vector<int> jac_seq;
-	int highest;
-	int lowest;
-	
-	jac_seq = jacobsthal_sequence(res.size());
-
-	std::vector<int>::iterator it;
-	
-	for (size_t i = 2; jac_seq[i] < (int)res.size() && res.size() > 0; i++)
-	{
-		highest = jac_seq[i+1]-1; 
-		lowest = jac_seq[i];
-		if (highest > (int)res.size()-1)
-			highest = res.size()-1;
-		
-		for (int j = highest; j >= lowest; j--)
-		{
-			it = main_chain.begin() + binary_sort(main_chain, res[j].smallest);
-			main_chain.insert(it, res[j].smallest);
-		}
-		
-		// std::cout << highest << "..." << lowest << std::endl;
-		// std::cout << res[highest].smallest << "->" << res[lowest].smallest << std::endl;
-	}
-	if (unpaired != -1)
-	{
-		if (main_chain.size() == 0)
-			main_chain.insert(main_chain.begin(), unpaired);
-		else
-		{			
-			it = main_chain.begin() + binary_sort(main_chain, unpaired);
-			main_chain.insert(it, unpaired);
-		}
-	}
+	std::vector<pairs> vecArrLargest = vecArr.rec_largest(vecArr.get_container());
+	std::vector<int> jcb_seq = jacobsthal_sequence(vecArrLargest.size());
+	std::vector<int> main_chain = vecArr.smallest_insertion(vecArrLargest, vecArr, unpaired, jcb_seq);
 	gettimeofday(&end, NULL);
+
+	gettimeofday(&start2, NULL);
+	std::deque<pairs> dequeArrLargest = dequeArr.rec_largest(dequeArr.get_container());
+	std::vector<int> jcb_seq2 = jacobsthal_sequence(vecArrLargest.size());
+	std::vector<int> main_chain2 = vecArr.smallest_insertion(vecArrLargest, vecArr, unpaired, jcb_seq);
+	gettimeofday(&end2, NULL);
+	
+	
 	long long us = (end.tv_sec - start.tv_sec) * 1000000LL + (end.tv_usec - start.tv_usec);
+	long long us2 = (end.tv_sec - start.tv_sec) * 1000000LL + (end2.tv_usec - start2.tv_usec);
 	
 	std::cout << "After:  ";
 	for (size_t i = 0; i < main_chain.size(); i++)
@@ -248,6 +129,6 @@ int	main(int argc, char **argv)
 	std::cout << std::endl;
 
 	std::cout << "Time to process a range of " << main_chain.size() << " elements with \033[32mstd::vector\033[0m : "<< us << " us" << std::endl;
-	
+	std::cout << "Time to process a range of " << main_chain.size() << " elements with \033[32mstd::deque\033[0m : "<< us2 << " us" << std::endl;
 	return (0);
 }

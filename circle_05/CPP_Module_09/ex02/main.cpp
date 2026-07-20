@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/20 13:36:41 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/20 13:59:55 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ std::vector<int> jacobsthal_sequence(int n)
 
 int	main(int argc, char **argv)
 {
-	timeval start, end, start2, end2;
+	timespec tstart, tend, tstart2, tend2;
 	if (argc < 2)
 	{
 		std::cerr << "\033[31mError: Wrong use of program!\033[0m" << std::endl;
@@ -107,22 +107,22 @@ int	main(int argc, char **argv)
 	vecArr.create_pairs(unsorted_numbers, unpaired);
 	dequeArr.create_pairs(unsorted_numbers, unpaired);
 	
-	gettimeofday(&start, NULL);
+	clock_gettime(CLOCK_MONOTONIC, &tstart);
 	std::vector<pairs> vecArrLargest = vecArr.rec_largest(vecArr.get_container());
 	std::vector<int> jcb_seq = jacobsthal_sequence(vecArrLargest.size());
 	std::vector<int> main_chain = vecArr.smallest_insertion(vecArrLargest, vecArr, unpaired, jcb_seq);
-	gettimeofday(&end, NULL);
+	clock_gettime(CLOCK_MONOTONIC, &tend);
 
-	gettimeofday(&start2, NULL);
+	clock_gettime(CLOCK_MONOTONIC, &tstart2);
 	std::deque<pairs> dequeArrLargest = dequeArr.rec_largest(dequeArr.get_container());
 	std::vector<int> jcb_seq2 = jacobsthal_sequence(vecArrLargest.size());
 	std::vector<int> main_chain2 = vecArr.smallest_insertion(vecArrLargest, vecArr, unpaired, jcb_seq);
-	gettimeofday(&end2, NULL);
+	clock_gettime(CLOCK_MONOTONIC, &tend2);
 	
 	
-	long long us = (end.tv_sec - start.tv_sec) * 1000000LL + (end.tv_usec - start.tv_usec);
-	long long us2 = (end.tv_sec - start.tv_sec) * 1000000LL + (end2.tv_usec - start2.tv_usec);
-	
+	long long us = (long long)(tend.tv_sec - tstart.tv_sec) * 1000000LL + (long long)(tend.tv_nsec - tstart.tv_nsec) / 1000LL;	
+	long long us2= (long long)(tend2.tv_sec - tstart2.tv_sec) * 1000000LL + (long long)(tend2.tv_nsec - tstart2.tv_nsec) / 1000LL;
+
 	std::cout << "After:  ";
 	for (size_t i = 0; i < main_chain.size(); i++)
 		std::cout << main_chain[i] << " ";

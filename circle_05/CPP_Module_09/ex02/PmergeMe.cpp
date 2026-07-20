@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 13:20:15 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/20 13:43:17 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/20 15:24:46 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,15 +110,13 @@ void PmergeMe<C>::create_pairs(std::vector<int>& unsorted_numbers, int& unpaired
 }
 
 template<typename C>
-int PmergeMe<C>::binary_sort(std::vector<int> main_chain, int n)
+int PmergeMe<C>::binary_sort(std::vector<int> main_chain, int n, int high)
 {
 	int low;
-	int high;
 	int mid;
 
 	for (size_t i = 0; i < main_chain.size(); i++)
 	low = 0;
-	high = main_chain.size();
 	while (high != low)
 	{
 		mid = main_chain[(low+high)/2];
@@ -134,6 +132,12 @@ template<typename C>
 std::vector<int> PmergeMe<C>::smallest_insertion(C vecArrLargest, PmergeMe<C> vecArr, int &unpaired, std::vector<int> jcb_sq)
 {
 	std::vector<int> main_chain;
+	std::vector<int> pos_largest;
+	
+	for (size_t i = 0; i < vecArrLargest.size(); i++)
+		pos_largest.push_back(i + 1);
+	
+
 	for (size_t i = 0; i < vecArrLargest.size(); i++)
 		main_chain.push_back(vecArrLargest[i].largest);
 	
@@ -154,7 +158,13 @@ std::vector<int> PmergeMe<C>::smallest_insertion(C vecArrLargest, PmergeMe<C> ve
 		
 		for (int j = highest; j >= lowest; j--)
 		{
-			it = main_chain.begin() + vecArr.binary_sort(main_chain, vecArrLargest[j].smallest);
+			int place = vecArr.binary_sort(main_chain, vecArrLargest[j].smallest, pos_largest[j]);
+			it = main_chain.begin() + place;
+			for (size_t k = 0; k < pos_largest.size(); k++)
+			{
+				if (place <= pos_largest[k])
+					pos_largest[k] += 1;
+			}
 			main_chain.insert(it, vecArrLargest[j].smallest);
 		}
 	}
@@ -164,7 +174,7 @@ std::vector<int> PmergeMe<C>::smallest_insertion(C vecArrLargest, PmergeMe<C> ve
 			main_chain.insert(main_chain.begin(), unpaired);
 		else
 		{			
-			it = main_chain.begin() + vecArr.binary_sort(main_chain, unpaired);
+			it = main_chain.begin() + vecArr.binary_sort(main_chain, unpaired, main_chain.size());
 			main_chain.insert(it, unpaired);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/20 13:59:55 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/20 15:27:53 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ int	main(int argc, char **argv)
 
 	clock_gettime(CLOCK_MONOTONIC, &tstart2);
 	std::deque<pairs> dequeArrLargest = dequeArr.rec_largest(dequeArr.get_container());
-	std::vector<int> jcb_seq2 = jacobsthal_sequence(vecArrLargest.size());
-	std::vector<int> main_chain2 = vecArr.smallest_insertion(vecArrLargest, vecArr, unpaired, jcb_seq);
+	std::vector<int> jcb_seq2 = jacobsthal_sequence(dequeArrLargest.size());
+	std::vector<int> main_chain2 = dequeArr.smallest_insertion(dequeArrLargest, dequeArr, unpaired, jcb_seq);
 	clock_gettime(CLOCK_MONOTONIC, &tend2);
 	
 	

@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 13:20:15 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/20 13:29:11 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/20 13:43:17 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,9 +157,6 @@ std::vector<int> PmergeMe<C>::smallest_insertion(C vecArrLargest, PmergeMe<C> ve
 			it = main_chain.begin() + vecArr.binary_sort(main_chain, vecArrLargest[j].smallest);
 			main_chain.insert(it, vecArrLargest[j].smallest);
 		}
-		
-		// std::cout << highest << "..." << lowest << std::endl;
-		// std::cout << res[highest].smallest << "->" << res[lowest].smallest << std::endl;
 	}
 	if (unpaired != -1)
 	{

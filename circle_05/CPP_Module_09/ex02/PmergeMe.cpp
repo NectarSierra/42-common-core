@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 13:20:15 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/21 19:20:59 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/21 19:28:23 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ PmergeMe<C, C_int> &PmergeMe<C, C_int>::operator=(const PmergeMe<C, C_int> &othe
 }
 
 template<typename C, typename C_int>
-C PmergeMe<C, C_int>::merge(C left, C right)
+C PmergeMe<C, C_int>::merge(C &left, C &right)
 {
     C res;
 
@@ -66,7 +66,7 @@ C PmergeMe<C, C_int>::merge(C left, C right)
 }
 
 template<typename C, typename C_int>
-C PmergeMe<C, C_int>::rec_largest(C arr)
+C PmergeMe<C, C_int>::rec_largest(const C& arr)
 {
     if (arr.size() <= 1)
         return arr;
@@ -110,7 +110,7 @@ void PmergeMe<C, C_int>::create_pairs(std::vector<int>& unsorted_numbers, int& u
 }
 
 template<typename C, typename C_int>
-int PmergeMe<C, C_int>::binary_sort(C_int main_chain, int n, int high)
+int PmergeMe<C, C_int>::binary_sort(C_int &main_chain, int n, int high)
 {
 	int low;
 	int mid;
@@ -129,7 +129,7 @@ int PmergeMe<C, C_int>::binary_sort(C_int main_chain, int n, int high)
 }
 
 template<typename C, typename C_int>
-void PmergeMe<C,C_int>::smallest_insertion(C vecArrLargest, PmergeMe<C, C_int> vecArr, int &unpaired, std::vector<int> jcb_sq, C_int &main_chain)
+void PmergeMe<C,C_int>::smallest_insertion(C &vecArrLargest, PmergeMe<C, C_int> &vecArr, int &unpaired, std::vector<int> &jcb_sq, C_int &main_chain)
 {
 	C_int pos_largest;
 	

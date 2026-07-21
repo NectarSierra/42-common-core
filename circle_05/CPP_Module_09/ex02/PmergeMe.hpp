@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 13:20:31 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/21 19:19:55 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/21 19:28:29 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ public:
 	~PmergeMe();
 	PmergeMe &operator=(const PmergeMe &other);
 	
-	C merge(C left, C right);
-	C rec_largest(C arr);
+	C merge(C& left, C& right);
+	C rec_largest(const C& arr);
 	void create_pairs(std::vector<int>& unsorted_numbers, int& unpaired);
-	int binary_sort(C_int main_chain, int n, int high);
-	void smallest_insertion(C vecArrLargest, PmergeMe vecArr, int &unpaired, std::vector<int> jcb_sq, C_int &main_chain);
+	int binary_sort(C_int& main_chain, int n, int high);
+	void smallest_insertion(C& vecArrLargest, PmergeMe& vecArr, int &unpaired, std::vector<int>& jcb_sq, C_int &main_chain);
 
 	C get_container();
 };

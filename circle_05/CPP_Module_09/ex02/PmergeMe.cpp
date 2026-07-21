@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 13:20:15 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/21 19:28:23 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/21 19:53:07 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void PmergeMe<C, C_int>::create_pairs(std::vector<int>& unsorted_numbers, int& u
 }
 
 template<typename C, typename C_int>
-int PmergeMe<C, C_int>::binary_sort(C_int &main_chain, int n, int high)
+int PmergeMe<C, C_int>::binary_sort(const C_int &main_chain, int n, int high)
 {
 	int low;
 	int mid;
@@ -129,9 +129,9 @@ int PmergeMe<C, C_int>::binary_sort(C_int &main_chain, int n, int high)
 }
 
 template<typename C, typename C_int>
-void PmergeMe<C,C_int>::smallest_insertion(C &vecArrLargest, PmergeMe<C, C_int> &vecArr, int &unpaired, std::vector<int> &jcb_sq, C_int &main_chain)
+void PmergeMe<C,C_int>::smallest_insertion(const C &vecArrLargest, PmergeMe<C, C_int> &vecArr, int &unpaired,const std::vector<int> &jcb_sq, C_int &main_chain)
 {
-	C_int pos_largest;
+	std::vector<int> pos_largest;
 	
 	for (size_t i = 0; i < vecArrLargest.size(); i++)
 		pos_largest.push_back(i + 1);

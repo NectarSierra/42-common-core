@@ -6,32 +6,32 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 13:20:15 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/20 15:24:46 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/21 19:20:59 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-template<typename C>
-PmergeMe<C>::PmergeMe(const C &arr) : container(arr)
+template<typename C, typename C_int>
+PmergeMe<C, C_int>::PmergeMe(const C &arr) : container(arr)
 {
 	
 }
 
-template<typename C>
-PmergeMe<C>::PmergeMe(const PmergeMe<C> &other)
+template<typename C, typename C_int>
+PmergeMe<C, C_int>::PmergeMe(const PmergeMe<C, C_int> &other)
 {
 	*this = other;
 }
 
-template<typename C>
-PmergeMe<C>::~PmergeMe()
+template<typename C, typename C_int>
+PmergeMe<C, C_int>::~PmergeMe()
 {
 	
 }
 
-template<typename C>
-PmergeMe<C> &PmergeMe<C>::operator=(const PmergeMe<C> &other)
+template<typename C, typename C_int>
+PmergeMe<C, C_int> &PmergeMe<C, C_int>::operator=(const PmergeMe<C, C_int> &other)
 {
 	if (this != &other)
 	{
@@ -40,8 +40,8 @@ PmergeMe<C> &PmergeMe<C>::operator=(const PmergeMe<C> &other)
 	return (*this);
 }
 
-template<typename C>
-C PmergeMe<C>::merge(C left, C right)
+template<typename C, typename C_int>
+C PmergeMe<C, C_int>::merge(C left, C right)
 {
     C res;
 
@@ -65,8 +65,8 @@ C PmergeMe<C>::merge(C left, C right)
     return (res);
 }
 
-template<typename C>
-C PmergeMe<C>::rec_largest(C arr)
+template<typename C, typename C_int>
+C PmergeMe<C, C_int>::rec_largest(C arr)
 {
     if (arr.size() <= 1)
         return arr;
@@ -82,8 +82,8 @@ C PmergeMe<C>::rec_largest(C arr)
     return (merge(left, right));
 }
 
-template<typename C>
-void PmergeMe<C>::create_pairs(std::vector<int>& unsorted_numbers, int& unpaired)
+template<typename C, typename C_int>
+void PmergeMe<C, C_int>::create_pairs(std::vector<int>& unsorted_numbers, int& unpaired)
 {
 	C arr1;
 	pairs tmp;
@@ -109,8 +109,8 @@ void PmergeMe<C>::create_pairs(std::vector<int>& unsorted_numbers, int& unpaired
 	this->container = arr1;
 }
 
-template<typename C>
-int PmergeMe<C>::binary_sort(std::vector<int> main_chain, int n, int high)
+template<typename C, typename C_int>
+int PmergeMe<C, C_int>::binary_sort(C_int main_chain, int n, int high)
 {
 	int low;
 	int mid;
@@ -128,11 +128,10 @@ int PmergeMe<C>::binary_sort(std::vector<int> main_chain, int n, int high)
 	return (low);
 }
 
-template<typename C>
-std::vector<int> PmergeMe<C>::smallest_insertion(C vecArrLargest, PmergeMe<C> vecArr, int &unpaired, std::vector<int> jcb_sq)
+template<typename C, typename C_int>
+void PmergeMe<C,C_int>::smallest_insertion(C vecArrLargest, PmergeMe<C, C_int> vecArr, int &unpaired, std::vector<int> jcb_sq, C_int &main_chain)
 {
-	std::vector<int> main_chain;
-	std::vector<int> pos_largest;
+	C_int pos_largest;
 	
 	for (size_t i = 0; i < vecArrLargest.size(); i++)
 		pos_largest.push_back(i + 1);
@@ -147,7 +146,7 @@ std::vector<int> PmergeMe<C>::smallest_insertion(C vecArrLargest, PmergeMe<C> ve
 	int highest;
 	int lowest;
 	
-	std::vector<int>::iterator it;
+	typename C_int::iterator it;
 	
 	for (size_t i = 2; jcb_sq[i] < (int)vecArrLargest.size() && vecArrLargest.size() > 0; i++)
 	{
@@ -178,16 +177,15 @@ std::vector<int> PmergeMe<C>::smallest_insertion(C vecArrLargest, PmergeMe<C> ve
 			main_chain.insert(it, unpaired);
 		}
 	}
-	return (main_chain);
 }
 
-template<typename C>
-C PmergeMe<C>::get_container()
+template<typename C, typename C_int>
+C PmergeMe<C, C_int>::get_container()
 {
 	return (this->container);
 }
 
 #include <deque>
 
-template class PmergeMe<std::vector<pairs> >;
-template class PmergeMe<std::deque<pairs> >;
+template class PmergeMe<std::vector<pairs>, std::vector<int> >;
+template class PmergeMe<std::deque<pairs>, std::deque<int> >;

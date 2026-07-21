@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/20 15:27:53 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/21 19:07:49 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ int	main(int argc, char **argv)
 	std::vector<pairs> arr1;
 	std::deque<pairs> arr2;
 	
-	PmergeMe<std::vector<pairs> > vecArr(arr1);
-	PmergeMe<std::deque<pairs> > dequeArr(arr2);
+	PmergeMe<std::vector<pairs>, std::vector<int> > vecArr(arr1);
+	PmergeMe<std::deque<pairs>, std::deque<int> > dequeArr(arr2);
 
 	int	unpaired = -1;
 	
@@ -110,13 +110,15 @@ int	main(int argc, char **argv)
 	clock_gettime(CLOCK_MONOTONIC, &tstart);
 	std::vector<pairs> vecArrLargest = vecArr.rec_largest(vecArr.get_container());
 	std::vector<int> jcb_seq = jacobsthal_sequence(vecArrLargest.size());
-	std::vector<int> main_chain = vecArr.smallest_insertion(vecArrLargest, vecArr, unpaired, jcb_seq);
+	std::vector<int> main_chain;
+	vecArr.smallest_insertion(vecArrLargest, vecArr, unpaired, jcb_seq, main_chain);
 	clock_gettime(CLOCK_MONOTONIC, &tend);
 
 	clock_gettime(CLOCK_MONOTONIC, &tstart2);
 	std::deque<pairs> dequeArrLargest = dequeArr.rec_largest(dequeArr.get_container());
 	std::vector<int> jcb_seq2 = jacobsthal_sequence(dequeArrLargest.size());
-	std::vector<int> main_chain2 = dequeArr.smallest_insertion(dequeArrLargest, dequeArr, unpaired, jcb_seq);
+	std::deque<int> main_chain2;
+	dequeArr.smallest_insertion(dequeArrLargest, dequeArr, unpaired, jcb_seq, main_chain2);
 	clock_gettime(CLOCK_MONOTONIC, &tend2);
 	
 	

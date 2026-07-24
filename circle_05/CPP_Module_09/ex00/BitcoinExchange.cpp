@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
+/*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 13:00:04 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/04/15 15:03:56 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/24 12:01:00 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,11 @@ bool str_isdigit(std::string input)
 
 bool is_value_valid(std::string value)
 {
-	float f_value;
-	bool	is_neg = false;
+	float	f_value;
 	bool	dot = false;
 
 	for (std::string::iterator it = value.begin(); it != value.end(); it++)
 	{
-		if (*it == '-' && !is_neg)
-		{
-			is_neg = true;
-			continue;
-		}
 		if (*it == '.' && !dot)
 		{
 			dot = true;
@@ -55,7 +49,7 @@ bool is_value_valid(std::string value)
 		}
 		if (isdigit(*it) == 0)
 		{
-			std::cerr << "\033[31mError:\033[0m Bad value format\033[33m => \033[0m"<< value << std::endl;
+			std::cerr << "\033[31mError:\033[0m Non digit \'" << *it << "\'\033[33m => \033[0m"<< value << std::endl;
 			return (false);
 		}
 	}
@@ -106,7 +100,6 @@ std::pair<std::string, float> BitcoinExchange::mysearch(std::string date_search)
 	it = btc_history_db.find(date_search);
 	if (it == btc_history_db.end())
 	{
-		// std::cerr << "\033[33m" << "[Debug Warning] " << "\033[0m" << "Could not find element. Returning the lower closest one." << std::endl;
 		it = btc_history_db.lower_bound(date_search);
 		if (it == btc_history_db.end())
 		{
@@ -121,6 +114,8 @@ std::pair<std::string, float> BitcoinExchange::mysearch(std::string date_search)
 
 BitcoinExchange::BitcoinExchange(const std::string db_path, const std::string input) : db_path(db_path)
 {
+	std::string		date;
+	std::string		value;
 	std::string		line;
 	std::ifstream	db_stream(db_path.c_str());
 	if (!db_stream)
@@ -128,14 +123,30 @@ BitcoinExchange::BitcoinExchange(const std::string db_path, const std::string in
 		std::cerr << "\033[31m" << "[Error] " << "\033[0m" << "Could not open file: " << db_path << std::endl;
 		return;
 	}
-	getline(db_stream, line); /* skip 1st line */
+	getline(db_stream, line);
+	if (line != "date,exchange_rate")
+	{
+		std::cerr << "\033[31mError:\033[0m Invalid DB\033[33m \033[0m" << std::endl;
+		return;
+	}
 	while (getline(db_stream, line))
+	{
+		std::size_t found = line.find(",");
+		if (found == std::string::npos)
+		{
+			std::cerr << "\033[31mError:\033[0m DB Bad input\033[33m => \033[0m"<< line << std::endl;
+			return;
+		}
+		date = line.substr(0, found);
+		if (!is_date_valid(date))
+		{
+			std::cerr << "\033[31mError:\033[0m DB Bad input date\033[33m => \033[0m"<< date << std::endl;
+			return;
+		}
    		btc_history_db.insert(get_pair_from_line(line));
+	}
 
 	/* -------------------------------------------- */
-
-	std::string		date;
-	std::string		value;
 
 	std::string		year;
 	std::string		month;
@@ -148,7 +159,12 @@ BitcoinExchange::BitcoinExchange(const std::string db_path, const std::string in
 		std::cerr << "\033[31m" << "[Error] " << "\033[0m" << "Could not open file: " << input << std::endl;
 		return;
 	}
-	getline(input_stream, line); /* skip 1st line */
+	getline(input_stream, line);
+	if (line != "date | value")
+	{
+		std::cerr << "\033[31mError:\033[0m Invalid input\033[33m \033[0m" << std::endl;
+		return;
+	}
 	while (getline(input_stream, line))
 	{
 		std::size_t found = line.find(" | ");

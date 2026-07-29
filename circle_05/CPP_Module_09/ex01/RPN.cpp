@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsaillez <nsaillez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 12:28:18 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/04/28 09:57:42 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/29 21:08:12 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void RPN::calculate()
 					std::cerr << "\033[31m" << "Error: Cannot divide by 0" << "\033[0m" << std::endl;
 					return;
 				}
+				res = b / a;
 				temp.push(res); break;
 			}
 		}

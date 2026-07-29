@@ -6,7 +6,7 @@
 /*   By: nsaillez <nsaillez@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 13:06:26 by nsaillez          #+#    #+#             */
-/*   Updated: 2026/07/21 19:27:40 by nsaillez         ###   ########.fr       */
+/*   Updated: 2026/07/29 20:44:20 by nsaillez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,15 +99,11 @@ int	main(int argc, char **argv)
 	std::vector<pairs> arr1;
 	std::deque<pairs> arr2;
 	
-	PmergeMe<std::vector<pairs>, std::vector<int> > vecArr(arr1);
-	PmergeMe<std::deque<pairs>, std::deque<int> > dequeArr(arr2);
-
 	int	unpaired = -1;
-	
-	vecArr.create_pairs(unsorted_numbers, unpaired);
-	dequeArr.create_pairs(unsorted_numbers, unpaired);
-	
+		
 	clock_gettime(CLOCK_MONOTONIC, &tstart);
+	PmergeMe<std::vector<pairs>, std::vector<int> > vecArr(arr1);
+	vecArr.create_pairs(unsorted_numbers, unpaired);
 	std::vector<pairs> vecArrLargest = vecArr.rec_largest(vecArr.get_container());
 	std::vector<int> jcb_seq = jacobsthal_sequence(vecArrLargest.size());
 	std::vector<int> main_chain;
@@ -115,6 +111,8 @@ int	main(int argc, char **argv)
 	clock_gettime(CLOCK_MONOTONIC, &tend);
 
 	clock_gettime(CLOCK_MONOTONIC, &tstart2);
+	PmergeMe<std::deque<pairs>, std::deque<int> > dequeArr(arr2);
+	dequeArr.create_pairs(unsorted_numbers, unpaired);
 	std::deque<pairs> dequeArrLargest = dequeArr.rec_largest(dequeArr.get_container());
 	std::vector<int> jcb_seq2 = jacobsthal_sequence(dequeArrLargest.size());
 	std::deque<int> main_chain2;
